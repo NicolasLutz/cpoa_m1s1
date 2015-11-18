@@ -1,0 +1,5 @@
+#ifndef IMGGRADIENT_H
+#define IMGGRADIENT_H
+
+
+#endif // IMGGRADIENT_H

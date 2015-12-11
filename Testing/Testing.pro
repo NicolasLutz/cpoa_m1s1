@@ -25,9 +25,11 @@ LIBS +=  -L ../lib \
 
 DESTDIR = ../bin
 
-SOURCES += main_test.cpp
+SOURCES += main_test.cpp \
+    etudiant.cpp
 
-HEADERS += main_test.h
+HEADERS += main_test.h \
+    etudiant.h
 
 # no interface for simple test
 #HEADERS  += mainwindow.h

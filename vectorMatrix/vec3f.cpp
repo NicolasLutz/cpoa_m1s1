@@ -2,20 +2,20 @@
 
 //====================================================================================================================================
 //Constructeurs
-Vec3f::Vec3f() : Vector<3>()
+Vec3f::Vec3f() : Vector<3, float>()
 {}
 
-Vec3f::Vec3f(float x, float y, float z) : Vector<3>()
+Vec3f::Vec3f(float x, float y, float z) : Vector<3, float>()
 {
     m_tab[0]=x;
     m_tab[1]=y;
     m_tab[2]=z;
 }
 
-Vec3f::Vec3f(const Vec3f &other) : Vector<3>(other)
+Vec3f::Vec3f(const Vec3f &other) : Vector<3, float>(other)
 {}
 
-Vec3f::Vec3f(const Vec2f &vector2, float z) : Vector<3>()
+Vec3f::Vec3f(const Vec2f &vector2, float z) : Vector<3, float>()
 {
     m_tab[0]=vector2.X();
     m_tab[1]=vector2.Y();

@@ -3,7 +3,7 @@
 
 #include "vector.hpp"
 
-class Vec2f : public Vector<2>
+class Vec2f : public Vector<2, float>
 {
 public:
 

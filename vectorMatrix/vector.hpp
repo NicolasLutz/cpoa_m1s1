@@ -3,7 +3,7 @@
 
 #include "array.hpp"
 
-template<int size> class Vector : public Array<size, float>
+template<size_t size, typename T> class Vector : public Array<size, T>
 {
 public:
 
@@ -11,21 +11,21 @@ public:
 
     Vector();
 
-    Vector(const Vector<size> &vector);
+    Vector(const Vector<size, T> &vector);
 
     //Opérateurs
 
-    Vector<size> operator+(const Vector<size> &other) const;
-    Vector<size>& operator+=(const Vector<size> &other);
+    Vector<size, T> operator+(const Vector<size, T> &other) const;
+    Vector<size, T>& operator+=(const Vector<size, T> &other);
 
-    Vector<size> operator-(const Vector<size> &other) const;
-    Vector<size>& operator-=(const Vector<size> &other);
+    Vector<size, T> operator-(const Vector<size, T> &other) const;
+    Vector<size, T>& operator-=(const Vector<size, T> &other);
 
-    Vector<size> operator*(float s) const;
-    Vector<size>& operator*=(float s);
+    Vector<size, T> operator*(T& s) const;
+    Vector<size, T>& operator*=(T& s);
 
-    Vector<size> operator/(float s) const;
-    Vector<size>& operator/=(float s);
+    Vector<size, T> operator/(T& s) const;
+    Vector<size, T>& operator/=(T& s);
 };
 
 //------------------------------------------------
@@ -34,73 +34,73 @@ public:
 //====================================================================================================================================
 //Constructeurs//
 
-template<int size>
-Vector<size>::Vector() : Array<size,float>()
+template<size_t size, typename T>
+Vector<size, T>::Vector() : Array<size, T>()
 {
 }
 
-template<int size>
-Vector<size>::Vector(const Vector<size> &vector) : Array<size, float>(vector)
+template<size_t size, typename T>
+Vector<size, T>::Vector(const Vector<size, T> &vector) : Array<size, T>(vector)
 {}
 
 //====================================================================================================================================
 //Opérateurs//
 
-template<int size>
-Vector<size> Vector<size>::operator+(const Vector<size> &other) const
+template<size_t size, typename T>
+Vector<size, T> Vector<size, T>::operator+(const Vector<size, T> &other) const
 {
-    Vector<size> v;
-    for(int i=0; i<size; i++)
+    Vector<size, T> v;
+    for(unsigned int i=0; i<size; i++)
     {
-        v[i]=this->m_tab[i]+other.getElement(i);
+        v[i]=this->m_tab[i]+other[i];
     }
     return v;
 }
 
 //====================================================================================================================================
 
-template<int size>
-Vector<size>& Vector<size>::operator+=(const Vector<size> &other)
+template<size_t size, typename T>
+Vector<size, T>& Vector<size, T>::operator+=(const Vector<size, T> &other)
 {
-    for(int i=0; i<size; i++)
+    for(unsigned int i=0; i<size; i++)
     {
-        this->m_tab[i]+=other.getElement(i);
+        this->m_tab[i]+=other[i];
     }
     return *(this);
 }
 
 //====================================================================================================================================
 
-template<int size>
-Vector<size> Vector<size>::operator-(const Vector<size> &other) const
+template<size_t size, typename T>
+Vector<size, T> Vector<size, T>::operator-(const Vector<size, T> &other) const
 {
-    Vector<size> v;
-    for(int i=0; i<size; i++)
+    Vector<size, T> v;
+    for(unsigned int i=0; i<size; i++)
     {
-        v[i]=this->m_tab[i]-other.getElement(i);
+        v[i]=this->m_tab[i]-other[i];
     }
     return v;
 }
 
 //====================================================================================================================================
 
-template<int size>
-Vector<size>& Vector<size>::operator-=(const Vector<size> &other)
+template<size_t size, typename T>
+Vector<size, T>& Vector<size, T>::operator-=(const Vector<size, T> &other)
 {
-    for(int i=0; i<size; i++)
+    for(unsigned int i=0; i<size; i++)
     {
-        this->m_tab[i]-=other.getElement(i);
+        this->m_tab[i]-=other[i];
     }
     return *(this);
 }
 
 //====================================================================================================================================
 
-template<int size>
-Vector<size> Vector<size>::operator*(float s) const
+template<size_t size, typename T>
+Vector<size, T> Vector<size, T>::operator*(T& s) const
 {
-    Vector<size> v;
-    for(int i=0; i<size; i++)
+    Vector<size, T> v;
+    for(unsigned int i=0; i<size; i++)
     {
         v[i]=this->m_tab[i]*s;
     }
@@ -109,10 +109,10 @@ Vector<size> Vector<size>::operator*(float s) const
 
 //====================================================================================================================================
 
-template<int size>
-Vector<size>& Vector<size>::operator*=(float s)
+template<size_t size, typename T>
+Vector<size, T>& Vector<size, T>::operator*=(T& s)
 {
-    for(int i=0; i<size; i++)
+    for(unsigned int i=0; i<size; i++)
     {
         this->m_tab[i]*=s;
     }
@@ -121,11 +121,11 @@ Vector<size>& Vector<size>::operator*=(float s)
 
 //====================================================================================================================================
 
-template<int size>
-Vector<size> Vector<size>::operator/(float s) const
+template<size_t size, typename T>
+Vector<size, T> Vector<size, T>::operator/(T& s) const
 {
-    Vector<size> v;
-    for(int i=0; i<size; i++)
+    Vector<size, T> v;
+    for(unsigned int i=0; i<size; i++)
     {
         v[i]=this->m_tab[i]/s;
     }
@@ -134,10 +134,10 @@ Vector<size> Vector<size>::operator/(float s) const
 
 //====================================================================================================================================
 
-template<int size>
-Vector<size>& Vector<size>::operator/=(float s)
+template<size_t size, typename T>
+Vector<size, T>& Vector<size, T>::operator/=(T& s)
 {
-    for(int i=0; i<size; i++)
+    for(unsigned int i=0; i<size; i++)
     {
         this->m_tab[i]/=s;
     }

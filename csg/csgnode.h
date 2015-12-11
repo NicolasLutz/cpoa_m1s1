@@ -15,19 +15,25 @@ public:
     virtual ~CsgNode();
 
     //Accesseurs//
-    std::string label() const;
-    int id() const;
-    CsgNode *parent() const;
+    const std::string& Label() const;
+    const unsigned int& Id() const;
+
+    //CsgNode *Parent() const;
+    CsgNode *Left() const;
+    CsgNode *Right() const;
 
     //Setteurs
-    void setParent(CsgNode *parent);
+    void setLeft(CsgNode *left);
+    void setRight(CsgNode *right);
+    //void setParent(CsgNode *parent);
 
 private:
-    int             m_id;
+    static unsigned int s_count;
+    unsigned int    m_id;
     std::string     m_label;
-    CsgNode         *m_parent;
     CsgNode         *m_left;
     CsgNode         *m_right;
+    //CsgNode         *m_parent; TODO
 };
 
 #endif // CSGNODE_H

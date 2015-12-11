@@ -2,23 +2,23 @@
 #define CSGPRIMITIVE_H
 
 #include "csgnode.h"
-#include "point.h"
+#include "vec2f.h"
 
 class CsgPrimitive : public CsgNode
 {
 public:
     //Constructeurs//
     CsgPrimitive();
-    CsgPrimitive(Point origin);
+    CsgPrimitive(Vec2f origin);
     CsgPrimitive(const CsgPrimitive &other);
     virtual ~CsgPrimitive();
 
     //Accesseurs//
-    Point& getOrigin();
-    const Point& getOrigin() const;
+    Vec2f& getOrigin();
+    const Vec2f& getOrigin() const;
 
 private:
-    Point m_origin;
+    Vec2f m_origin;
 };
 
 #endif // CSGPRIMITIVE_H

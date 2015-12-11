@@ -1,16 +1,16 @@
 #include "csgregularpolygon.h"
 
-CsgRegularPolygon::CsgRegularPolygon() : CsgPrimitive(), m_points(3)
+CsgRegularPolygon::CsgRegularPolygon() : CsgPrimitive(), m_vertices(3)
 {}
 
 //----------------------------------------------------------------------------
 
-CsgRegularPolygon::CsgRegularPolygon(Point origin) : CsgPrimitive(origin)
+CsgRegularPolygon::CsgRegularPolygon(Vec2f origin) : CsgPrimitive(origin)
 {}
 
 //----------------------------------------------------------------------------
 
-CsgRegularPolygon::CsgRegularPolygon(const CsgRegularPolygon &other) : CsgPrimitive(other), m_points(other.getPoints())
+CsgRegularPolygon::CsgRegularPolygon(const CsgRegularPolygon &other) : CsgPrimitive(other), m_vertices(other.Vertices())
 {}
 
 //----------------------------------------------------------------------------
@@ -21,9 +21,9 @@ CsgRegularPolygon::~CsgRegularPolygon()
 //----------------------------------------------------------------------------
 //Accesseurs//
 
-const std::vector<Point>& CsgRegularPolygon::getPoints() const
+const std::vector<Vec2f>& CsgRegularPolygon::Vertices() const
 {
-    return m_points;
+    return m_vertices;
 }
 
 CsgRegularPolygon& CsgRegularPolygon::operator++()

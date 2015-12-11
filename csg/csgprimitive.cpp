@@ -6,7 +6,7 @@ CsgPrimitive::CsgPrimitive():
 
 //----------------------------------------------------------------------------
 
-CsgPrimitive::CsgPrimitive(Point origin):
+CsgPrimitive::CsgPrimitive(Vec2f origin):
     CsgNode(), m_origin(origin)
 {}
 
@@ -26,12 +26,12 @@ CsgPrimitive::~CsgPrimitive()
 //----------------------------------------------------------------------------
 //Accesseurs//
 
-Point& CsgPrimitive::getOrigin()
+Vec2f& CsgPrimitive::getOrigin()
 {
     return m_origin;
 }
 
-const Point& CsgPrimitive::getOrigin() const
+const Vec2f& CsgPrimitive::getOrigin() const
 {
     return m_origin;
 }

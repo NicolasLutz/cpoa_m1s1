@@ -3,7 +3,7 @@
 
 #include "vec2f.h"
 
-class Vec3f : public Vector<3>
+class Vec3f : public Vector<3, float>
 {
 public:
 

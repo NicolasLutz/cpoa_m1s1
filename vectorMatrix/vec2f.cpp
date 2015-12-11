@@ -2,16 +2,16 @@
 
 //====================================================================================================================================
 //Constructeurs
-Vec2f::Vec2f() : Vector<2>()
+Vec2f::Vec2f() : Vector<2, float>()
 {}
 
-Vec2f::Vec2f(float x, float y) : Vector<2>()
+Vec2f::Vec2f(float x, float y) : Vector<2, float>()
 {
     m_tab[0]=x;
     m_tab[1]=y;
 }
 
-Vec2f::Vec2f(const Vec2f& other) : Vector<2>(other)
+Vec2f::Vec2f(const Vec2f& other) : Vector<2, float>(other)
 {}
 
 //====================================================================================================================================

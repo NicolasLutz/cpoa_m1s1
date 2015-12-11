@@ -4,9 +4,9 @@
 #include <stdexcept>
 #include <iostream>
 
-#define _e_ 0.01 //floating point authorized error for null check
+//#define _e_ 0.01 //floating point authorized error for null check
 
-template<int size, typename T> class Array
+template<size_t size, typename T> class Array
 {
 public:
 
@@ -20,15 +20,15 @@ public:
 
     Array& operator=(const Array<size,T> &other);
 
-    T& operator[](int i);
+    T& operator[](unsigned int i);
+
+    const T& operator[](unsigned int i) const;
 
     bool operator==(const Array<size,T> &other) const;
 
     //Accesseurs//
 
-    const T& getElement(int i) const; //read-only assignement
-
-    int getSize() const;
+    size_t Size() const;
 
     //Opérations//
 
@@ -40,7 +40,7 @@ protected://débatable ? TODO
 
 };
 
-template<int size, typename T>
+template<size_t size, typename T>
 std::ostream& operator<< (std::ostream &stream, const Array<size,T> &array);
 
 //------------------------------------------------
@@ -49,38 +49,48 @@ std::ostream& operator<< (std::ostream &stream, const Array<size,T> &array);
 //====================================================================================================================================
 //Constructeurs//
 
-template<int size, typename T>
+template<size_t size, typename T>
 Array<size,T>::Array()
 {}
 
 //====================================================================================================================================
 
-template<int size, typename T>
+template<size_t size, typename T>
 Array<size,T>::Array(const Array<size,T> &other)
 {
-    for(int i=0; i<size && i<size; i++)
+    for(unsigned int i=0; i<size; i++)
     {
-        m_tab[i]=other.getElement(i);
+        m_tab[i]=other[i];
     }
 }
 
 //====================================================================================================================================
 //Opérateurs//
 
-template<int size, typename T>
+template<size_t size, typename T>
 Array<size,T>& Array<size,T>::operator=(const Array<size, T> &other)
 {
-    for(int i=0; i<size && i<size; i++)
+    for(unsigned int i=0; i<size; i++)
     {
-        m_tab[i]=other.getElement(i);
+        m_tab[i]=other[i];
     }
     return *(this);
 }
 
 //====================================================================================================================================
 
-template<int size, typename T>
-T& Array<size,T>::operator[](int i)
+template<size_t size, typename T>
+T& Array<size,T>::operator[](unsigned int i)
+{
+    if(i>=size || i<0)
+    {
+         throw std::out_of_range("argument out of bounds");
+    }
+    return m_tab[i];
+}
+
+template<size_t size, typename T>
+const T& Array<size,T>::operator[](unsigned int i) const
 {
     if(i>=size || i<0)
     {
@@ -91,13 +101,13 @@ T& Array<size,T>::operator[](int i)
 
 //====================================================================================================================================
 
-template<int size, typename T>
+template<size_t size, typename T>
 bool Array<size,T>::operator==(const Array<size,T> &other) const
 {
     bool ret=true;
-    for(int i=0;i<size && ret;i++)
+    for(unsigned int i=0;i<size && ret;i++)
     {
-        if(m_tab[i]!=other.getElement(i))
+        if(m_tab[i]!=other[i])
             ret=false;
     }
     return ret;
@@ -106,30 +116,21 @@ bool Array<size,T>::operator==(const Array<size,T> &other) const
 //====================================================================================================================================
 //Accesseurs//
 
-template<int size, typename T>
-int Array<size,T>::getSize() const
+template<size_t size, typename T>
+size_t Array<size, T>::Size() const
 {
     return size;
-}
-
-template<int size, typename T>
-const T& Array<size,T>::getElement(int i) const
-{
-    if(i<size)
-        return m_tab[i];
-    else
-        throw std::out_of_range("argument out of bounds");
 }
 
 //====================================================================================================================================
 //Opérations//
 
-template<int size, typename T>
+template<size_t size, typename T>
 void Array<size,T>::exchangeWith(Array<size,T> &other)
 {
     Array<size,T> copy;
     copy=other;
-    for(int i=0;i<size;i++)
+    for(unsigned int i=0;i<size;i++)
     {
         other[i]=m_tab[i];
         m_tab[i]=copy[i];
@@ -139,17 +140,17 @@ void Array<size,T>::exchangeWith(Array<size,T> &other)
 //====================================================================================================================================
 //Autres//
 
-template<int size, typename T>
+template<size_t size, typename T>
 std::ostream& operator << (std::ostream &stream, const Array<size,T> &array)
 {
-    int i;
+    unsigned int i;
     stream << '[';
     for(i=0; i<(size-1); i++)
     {
-        stream << array.getElement(i) << ", ";
+        stream << array[i] << ", ";
     }
     if(i<size)
-        stream << array.getElement(i);
+        stream << array[i];
     stream << ']';
     return stream;
 }

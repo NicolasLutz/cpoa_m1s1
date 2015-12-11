@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[])
 {
-    prettyBadTestImage2Grey();
+    testEtudiantTp();
 }
 
 void testVec2f()
@@ -24,13 +24,14 @@ void testVec3f()
 
 void testVector()
 {
-    Vector<3> vec;
+    Vector<3, int> vec;
     vec[0]=1;
     vec[1]=2;
     vec[2]=3;
-    Vector<3> vec2(vec);
+    Vector<3, int> vec2(vec);
     vec+=vec2;
-    vec*=3;
+    int n=3;
+    vec*=n;
     std::cout << vec << std::endl;
 }
 
@@ -94,4 +95,26 @@ void prettyBadTestImage2Grey()
 
     Image2Grey img2("testLoad.pgm");
     img2.save("testSave2.pgm");
+}
+
+void testEtudiantTp()
+{
+    std::vector<Etudiant> cours1;
+    cours1.push_back(Etudiant("Moi", 21, ISI_F));
+    cours1.push_back(Etudiant("Mon voisin", 25, ISI_F));
+    cours1.push_back(Etudiant("Arthur", 23, ILC_F));
+    cours1.push_back(Etudiant("Archade", 22, RISE_F));
+
+    std::vector<Etudiant> cours2=cours1;
+
+    std::for_each(cours1.begin(), cours1.end(), E_display);
+    std::for_each(cours1.begin(), cours1.end(), Fnct_Display());
+
+    for(std::vector<Etudiant>::iterator it=cours2.begin(); it!=cours2.end(); ++it)
+    {
+        E_display(*it);
+    }
+
+    std::sort(cours1.begin(), cours1.end(), E_biggest);
+    std::for_each(cours1.begin(), cours1.end(), E_display);
 }

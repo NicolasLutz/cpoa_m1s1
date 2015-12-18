@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include "vec2f.h"
 
 #define _e_ 0.005 //define a floating point allowed error
 
@@ -30,10 +31,14 @@ public:
     //void setParent(CsgNode *parent);
 
     //Transformations//
+    virtual void T_apply()=0;
     virtual void T_reset()=0;
     virtual void T_rotate(float rad)=0;
     virtual void T_translate(float tx, float ty)=0;
     virtual void T_scale(float vx, float vy)=0;
+
+    //Opérations//
+    virtual bool intersects(const Vec2f &vertice) const=0;
 
 private:
     static unsigned int s_count;

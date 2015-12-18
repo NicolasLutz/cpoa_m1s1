@@ -165,3 +165,27 @@ bool BoundingBox::collides(const BoundingBox &other) const
     return (std::abs(X1() - other.X1()) * 2 < std::abs(X1()-X2())+std::abs(other.X1()-other.X2()) &&
             (std::abs(Y1() - other.Y1()) * 2 < std::abs(Y1()-Y2())+std::abs(other.Y1()-other.Y2())));
 }
+
+void BoundingBox::rotate(float rad)
+{
+    return;//literally nothing
+}
+
+void BoundingBox::translate(float tx, float ty)
+{
+    setX1(X1()+tx);
+    setX2(X2()+tx);
+    setY1(Y1()+ty);
+    setY2(Y2()+ty);
+}
+
+void BoundingBox::scale(float vx, float vy)
+{
+    float widthD2=(std::abs(X1()-X2())*vx)/2;
+    float heightD2=(std::abs(Y1()-Y2())*vy)/2;
+    Vec2f center((X1()-X2())/2, (Y1()-Y2())/2);
+    setX1(center.X()-widthD2);
+    setX2(center.X()+widthD2);
+    setY1(center.Y()-heightD2);
+    setY2(center.Y()+heightD2);
+}

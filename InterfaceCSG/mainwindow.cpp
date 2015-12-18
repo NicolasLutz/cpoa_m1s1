@@ -44,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->create_oper,SIGNAL(clicked()),SLOT(createOperation()));
 	connect(ui->create_prim,SIGNAL(clicked()),SLOT(createPrimtive()));
 	connect(ui->resetTransfo,SIGNAL(clicked()),SLOT(resetTransfo()));
-	connect(ui->applyTransfo,SIGNAL(clicked()),SLOT(applyTransfo()));
+    connect(ui->applyTransfo,SIGNAL(clicked()),SLOT(applyTransfo()));
 
 	connect(ui->translationX,SIGNAL(valueChanged(int)),SLOT(transfoSliderChanged()));
 	connect(ui->translationY,SIGNAL(valueChanged(int)),SLOT(transfoSliderChanged()));
@@ -129,7 +129,7 @@ void MainWindow::createOperation()
 	std::cout << " child: "<< left << " & "<< right;
 	std::cout << std::endl;
 
-//	CsgOperation* oper=NULL;
+    CsgOperation* oper=NULL;
 	switch(typeOp)
 	{
 //			Ici on recupère les deux fils à partir des identifiants et on crée le noeud operation correspondant
@@ -151,8 +151,8 @@ void MainWindow::createOperation()
 
 	drawTree();
 
-//	if (oper != NULL)
-//		ui->currentNode->setValue(oper->getId());
+    if (oper != NULL)
+        ui->currentNode->setValue(oper->Id());
 
 //	m_currentNode = oper;
 

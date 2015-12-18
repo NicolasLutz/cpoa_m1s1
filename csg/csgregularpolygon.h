@@ -20,7 +20,9 @@ public:
     CsgRegularPolygon& operator++(int);
 
     //Opérations//
-    bool isInside(const Vec2f &vertice) const;
+    bool intersects(const Vec2f &vertice) const;
+    void T_apply();
+    void T_reset();
 
 private:
     std::vector<Vec2f> m_vertices;

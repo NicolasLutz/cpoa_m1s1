@@ -18,11 +18,6 @@ CsgPrimitive::~CsgPrimitive()
 //----------------------------------------------------------------------------
 //Accesseurs//
 
-Vec2f& CsgPrimitive::Origin()
-{
-    return m_origin;
-}
-
 const Vec2f& CsgPrimitive::Origin() const
 {
     return m_origin;
@@ -33,9 +28,15 @@ const Matrix33f& CsgPrimitive::T_Matrix() const
     return m_T_matrix;
 }
 
+void CsgPrimitive::T_apply()
+{
+    m_origin = (m_T_matrix*m_origin).XY();
+}
+
 void CsgPrimitive::T_reset()
 {
     m_T_matrix.setId();
+    m_origin=Vec2f(0,0);
 }
 
 void CsgPrimitive::T_rotate(float rad)

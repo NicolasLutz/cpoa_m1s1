@@ -344,15 +344,27 @@ compiler_clean:
 ####### Compile
 
 _func.o: _func.cpp _func.h \
-		csgnode.h
+		csgnode.h \
+		../vectorMatrix/vector.hpp \
+		../vectorMatrix/array.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o _func.o _func.cpp
 
-boundingbox.o: boundingbox.cpp boundingbox.h
+boundingbox.o: boundingbox.cpp boundingbox.h \
+		../vectorMatrix/vec2f.h \
+		../vectorMatrix/vector.hpp \
+		../vectorMatrix/array.hpp \
+		../vectorMatrix/matrix33f.h \
+		../vectorMatrix/vec3f.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boundingbox.o boundingbox.cpp
 
 csgdisk.o: csgdisk.cpp csgdisk.h \
 		csgprimitive.h \
-		csgnode.h
+		csgnode.h \
+		../vectorMatrix/matrix33f.h \
+		../vectorMatrix/vec3f.h \
+		../vectorMatrix/vec2f.h \
+		../vectorMatrix/vector.hpp \
+		../vectorMatrix/array.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o csgdisk.o csgdisk.cpp
 
 csgnode.o: csgnode.cpp csgnode.h
@@ -363,17 +375,32 @@ csgoperation.o: csgoperation.cpp csgoperation.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o csgoperation.o csgoperation.cpp
 
 csgprimitive.o: csgprimitive.cpp csgprimitive.h \
-		csgnode.h
+		csgnode.h \
+		../vectorMatrix/matrix33f.h \
+		../vectorMatrix/vec3f.h \
+		../vectorMatrix/vec2f.h \
+		../vectorMatrix/vector.hpp \
+		../vectorMatrix/array.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o csgprimitive.o csgprimitive.cpp
 
 csgregularpolygon.o: csgregularpolygon.cpp csgregularpolygon.h \
 		csgprimitive.h \
-		csgnode.h
+		csgnode.h \
+		../vectorMatrix/matrix33f.h \
+		../vectorMatrix/vec3f.h \
+		../vectorMatrix/vec2f.h \
+		../vectorMatrix/vector.hpp \
+		../vectorMatrix/array.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o csgregularpolygon.o csgregularpolygon.cpp
 
 csgtree.o: csgtree.cpp csgtree.h \
 		csgprimitive.h \
 		csgnode.h \
+		../vectorMatrix/matrix33f.h \
+		../vectorMatrix/vec3f.h \
+		../vectorMatrix/vec2f.h \
+		../vectorMatrix/vector.hpp \
+		../vectorMatrix/array.hpp \
 		csgoperation.h \
 		_func.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o csgtree.o csgtree.cpp
@@ -382,7 +409,12 @@ csgnode.o: csgnode.cpp csgnode.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o csgnode.o csgnode.cpp
 
 csgprimitive.o: csgprimitive.cpp csgprimitive.h \
-		csgnode.h
+		csgnode.h \
+		../vectorMatrix/matrix33f.h \
+		../vectorMatrix/vec3f.h \
+		../vectorMatrix/vec2f.h \
+		../vectorMatrix/vector.hpp \
+		../vectorMatrix/array.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o csgprimitive.o csgprimitive.cpp
 
 csgoperation.o: csgoperation.cpp csgoperation.h \
@@ -391,26 +423,48 @@ csgoperation.o: csgoperation.cpp csgoperation.h \
 
 csgdisk.o: csgdisk.cpp csgdisk.h \
 		csgprimitive.h \
-		csgnode.h
+		csgnode.h \
+		../vectorMatrix/matrix33f.h \
+		../vectorMatrix/vec3f.h \
+		../vectorMatrix/vec2f.h \
+		../vectorMatrix/vector.hpp \
+		../vectorMatrix/array.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o csgdisk.o csgdisk.cpp
 
 csgregularpolygon.o: csgregularpolygon.cpp csgregularpolygon.h \
 		csgprimitive.h \
-		csgnode.h
+		csgnode.h \
+		../vectorMatrix/matrix33f.h \
+		../vectorMatrix/vec3f.h \
+		../vectorMatrix/vec2f.h \
+		../vectorMatrix/vector.hpp \
+		../vectorMatrix/array.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o csgregularpolygon.o csgregularpolygon.cpp
 
 csgtree.o: csgtree.cpp csgtree.h \
 		csgprimitive.h \
 		csgnode.h \
+		../vectorMatrix/matrix33f.h \
+		../vectorMatrix/vec3f.h \
+		../vectorMatrix/vec2f.h \
+		../vectorMatrix/vector.hpp \
+		../vectorMatrix/array.hpp \
 		csgoperation.h \
 		_func.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o csgtree.o csgtree.cpp
 
 _func.o: _func.cpp _func.h \
-		csgnode.h
+		csgnode.h \
+		../vectorMatrix/vector.hpp \
+		../vectorMatrix/array.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o _func.o _func.cpp
 
-boundingbox.o: boundingbox.cpp boundingbox.h
+boundingbox.o: boundingbox.cpp boundingbox.h \
+		../vectorMatrix/vec2f.h \
+		../vectorMatrix/vector.hpp \
+		../vectorMatrix/array.hpp \
+		../vectorMatrix/matrix33f.h \
+		../vectorMatrix/vec3f.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boundingbox.o boundingbox.cpp
 
 ####### Install

@@ -29,40 +29,61 @@ CsgOpType_t CsgOperation::Type() const
 //-----------------------------------------------------------------------------
 //Transformations//
 
+void CsgOperation::T_apply()
+{
+    Left()->T_apply();
+    Right()->T_apply();
+}
+
 void CsgOperation::T_reset()
 {
-    if(Left()!=NULL)
-        Left()->T_reset();
-    if(Right()!=NULL)
-        Right()->T_reset();
+    Left()->T_reset();
+    Right()->T_reset();
 }
 
 //-----------------------------------------------------------------------------
 
 void CsgOperation::T_rotate(float rad)
 {
-    if(Left()!=NULL)
-        Left()->T_rotate(rad);
-    if(Right()!=NULL)
-        Right()->T_rotate(rad);
+    Left()->T_rotate(rad);
+    Right()->T_rotate(rad);
 }
 
 //-----------------------------------------------------------------------------
 
 void CsgOperation::T_translate(float tx, float ty)
 {
-    if(Left()!=NULL)
-        Left()->T_translate(tx, ty);
-    if(Right()!=NULL)
-        Right()->T_translate(tx, ty);
+    Left()->T_translate(tx, ty);
+    Right()->T_translate(tx, ty);
 }
 
 //-----------------------------------------------------------------------------
 
 void CsgOperation::T_scale(float vx, float vy)
 {
-    if(Left()!=NULL)
-        Left()->T_scale(vx, vy);
-    if(Right()!=NULL)
-        Right()->T_scale(vx, vy);
+    Left()->T_scale(vx, vy);
+    Right()->T_scale(vx, vy);
 }
+
+//Opérations//
+
+bool CsgOperation::intersects(const Vec2f &vertice) const
+{
+    bool itDoes=false;
+    switch(this->Type())
+    {
+        case CSG_UNION:
+            itDoes=Left()->intersects(vertice) || Right()->intersects(vertice);
+            break;
+        case CSG_INTERSECTION:
+            itDoes=Left()->intersects(vertice) && Right()->intersects(vertice);
+            break;
+        case CSG_DIF:
+            itDoes=Left()->intersects(vertice) && !Right()->intersects(vertice);
+            break;
+        default:
+            itDoes=false;
+            break;
+    }
+}
+

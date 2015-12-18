@@ -33,219 +33,219 @@ SUBTARGETS    =  \
 
 sub-vectorMatrix-qmake_all:  FORCE
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
-	cd vectorMatrix/ && $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile
+	cd vectorMatrix/ && $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile
 	cd vectorMatrix/ && $(MAKE) -f Makefile qmake_all
 sub-vectorMatrix: FORCE
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
-	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile
+	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile
 sub-vectorMatrix-make_first-ordered: FORCE
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
-	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
+	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
 sub-vectorMatrix-make_first: FORCE
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
-	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
+	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
 sub-vectorMatrix-all-ordered: FORCE
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
-	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
+	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
 sub-vectorMatrix-all: FORCE
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
-	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
+	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
 sub-vectorMatrix-clean-ordered: FORCE
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
-	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
+	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
 sub-vectorMatrix-clean: FORCE
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
-	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
+	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
 sub-vectorMatrix-distclean-ordered: FORCE
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
-	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
+	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
 sub-vectorMatrix-distclean: FORCE
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
-	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
+	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
 sub-vectorMatrix-install_subtargets-ordered: FORCE
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
-	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
+	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
 sub-vectorMatrix-install_subtargets: FORCE
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
-	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
+	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
 sub-vectorMatrix-uninstall_subtargets-ordered: FORCE
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
-	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
+	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
 sub-vectorMatrix-uninstall_subtargets: FORCE
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
-	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
+	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
 sub-image-qmake_all: sub-vectorMatrix-qmake_all FORCE
 	@test -d image/ || mkdir -p image/
-	cd image/ && $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile
+	cd image/ && $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile
 	cd image/ && $(MAKE) -f Makefile qmake_all
 sub-image: FORCE
 	@test -d image/ || mkdir -p image/
-	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile
+	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile
 sub-image-make_first-ordered: sub-vectorMatrix-make_first-ordered  FORCE
 	@test -d image/ || mkdir -p image/
-	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
+	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
 sub-image-make_first: FORCE
 	@test -d image/ || mkdir -p image/
-	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
+	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
 sub-image-all-ordered: sub-vectorMatrix-all-ordered  FORCE
 	@test -d image/ || mkdir -p image/
-	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
+	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
 sub-image-all: FORCE
 	@test -d image/ || mkdir -p image/
-	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
+	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
 sub-image-clean-ordered: sub-vectorMatrix-clean-ordered  FORCE
 	@test -d image/ || mkdir -p image/
-	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
+	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
 sub-image-clean: FORCE
 	@test -d image/ || mkdir -p image/
-	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
+	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
 sub-image-distclean-ordered: sub-vectorMatrix-distclean-ordered  FORCE
 	@test -d image/ || mkdir -p image/
-	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
+	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
 sub-image-distclean: FORCE
 	@test -d image/ || mkdir -p image/
-	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
+	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
 sub-image-install_subtargets-ordered: sub-vectorMatrix-install_subtargets-ordered  FORCE
 	@test -d image/ || mkdir -p image/
-	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
+	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
 sub-image-install_subtargets: FORCE
 	@test -d image/ || mkdir -p image/
-	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
+	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
 sub-image-uninstall_subtargets-ordered: sub-vectorMatrix-uninstall_subtargets-ordered  FORCE
 	@test -d image/ || mkdir -p image/
-	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
+	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
 sub-image-uninstall_subtargets: FORCE
 	@test -d image/ || mkdir -p image/
-	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
+	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
 sub-csg-qmake_all: sub-image-qmake_all FORCE
 	@test -d csg/ || mkdir -p csg/
-	cd csg/ && $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile
+	cd csg/ && $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile
 	cd csg/ && $(MAKE) -f Makefile qmake_all
 sub-csg: FORCE
 	@test -d csg/ || mkdir -p csg/
-	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile
+	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile
 sub-csg-make_first-ordered: sub-image-make_first-ordered  FORCE
 	@test -d csg/ || mkdir -p csg/
-	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
+	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
 sub-csg-make_first: FORCE
 	@test -d csg/ || mkdir -p csg/
-	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
+	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
 sub-csg-all-ordered: sub-image-all-ordered  FORCE
 	@test -d csg/ || mkdir -p csg/
-	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
+	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
 sub-csg-all: FORCE
 	@test -d csg/ || mkdir -p csg/
-	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
+	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
 sub-csg-clean-ordered: sub-image-clean-ordered  FORCE
 	@test -d csg/ || mkdir -p csg/
-	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
+	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
 sub-csg-clean: FORCE
 	@test -d csg/ || mkdir -p csg/
-	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
+	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
 sub-csg-distclean-ordered: sub-image-distclean-ordered  FORCE
 	@test -d csg/ || mkdir -p csg/
-	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
+	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
 sub-csg-distclean: FORCE
 	@test -d csg/ || mkdir -p csg/
-	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
+	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
 sub-csg-install_subtargets-ordered: sub-image-install_subtargets-ordered  FORCE
 	@test -d csg/ || mkdir -p csg/
-	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
+	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
 sub-csg-install_subtargets: FORCE
 	@test -d csg/ || mkdir -p csg/
-	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
+	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
 sub-csg-uninstall_subtargets-ordered: sub-image-uninstall_subtargets-ordered  FORCE
 	@test -d csg/ || mkdir -p csg/
-	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
+	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
 sub-csg-uninstall_subtargets: FORCE
 	@test -d csg/ || mkdir -p csg/
-	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
+	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
 sub-Testing-qmake_all: sub-csg-qmake_all FORCE
 	@test -d Testing/ || mkdir -p Testing/
-	cd Testing/ && $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile
+	cd Testing/ && $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile
 	cd Testing/ && $(MAKE) -f Makefile qmake_all
 sub-Testing: FORCE
 	@test -d Testing/ || mkdir -p Testing/
-	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile
+	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile
 sub-Testing-make_first-ordered: sub-csg-make_first-ordered  FORCE
 	@test -d Testing/ || mkdir -p Testing/
-	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
+	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
 sub-Testing-make_first: FORCE
 	@test -d Testing/ || mkdir -p Testing/
-	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
+	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
 sub-Testing-all-ordered: sub-csg-all-ordered  FORCE
 	@test -d Testing/ || mkdir -p Testing/
-	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
+	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
 sub-Testing-all: FORCE
 	@test -d Testing/ || mkdir -p Testing/
-	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
+	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
 sub-Testing-clean-ordered: sub-csg-clean-ordered  FORCE
 	@test -d Testing/ || mkdir -p Testing/
-	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
+	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
 sub-Testing-clean: FORCE
 	@test -d Testing/ || mkdir -p Testing/
-	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
+	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
 sub-Testing-distclean-ordered: sub-csg-distclean-ordered  FORCE
 	@test -d Testing/ || mkdir -p Testing/
-	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
+	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
 sub-Testing-distclean: FORCE
 	@test -d Testing/ || mkdir -p Testing/
-	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
+	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
 sub-Testing-install_subtargets-ordered: sub-csg-install_subtargets-ordered  FORCE
 	@test -d Testing/ || mkdir -p Testing/
-	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
+	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
 sub-Testing-install_subtargets: FORCE
 	@test -d Testing/ || mkdir -p Testing/
-	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
+	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
 sub-Testing-uninstall_subtargets-ordered: sub-csg-uninstall_subtargets-ordered  FORCE
 	@test -d Testing/ || mkdir -p Testing/
-	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
+	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
 sub-Testing-uninstall_subtargets: FORCE
 	@test -d Testing/ || mkdir -p Testing/
-	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
+	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
 sub-InterfaceCSG-qmake_all: sub-Testing-qmake_all FORCE
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
-	cd InterfaceCSG/ && $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile
+	cd InterfaceCSG/ && $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile
 	cd InterfaceCSG/ && $(MAKE) -f Makefile qmake_all
 sub-InterfaceCSG: FORCE
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
-	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile
+	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile
 sub-InterfaceCSG-make_first-ordered: sub-Testing-make_first-ordered  FORCE
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
-	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
+	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
 sub-InterfaceCSG-make_first: FORCE
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
-	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
+	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
 sub-InterfaceCSG-all-ordered: sub-Testing-all-ordered  FORCE
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
-	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
+	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
 sub-InterfaceCSG-all: FORCE
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
-	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
+	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
 sub-InterfaceCSG-clean-ordered: sub-Testing-clean-ordered  FORCE
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
-	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
+	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
 sub-InterfaceCSG-clean: FORCE
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
-	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
+	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
 sub-InterfaceCSG-distclean-ordered: sub-Testing-distclean-ordered  FORCE
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
-	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
+	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
 sub-InterfaceCSG-distclean: FORCE
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
-	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
+	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
 sub-InterfaceCSG-install_subtargets-ordered: sub-Testing-install_subtargets-ordered  FORCE
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
-	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
+	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
 sub-InterfaceCSG-install_subtargets: FORCE
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
-	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
+	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
 sub-InterfaceCSG-uninstall_subtargets-ordered: sub-Testing-uninstall_subtargets-ordered  FORCE
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
-	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
+	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
 sub-InterfaceCSG-uninstall_subtargets: FORCE
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
-	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
+	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
 
 Makefile: csg_particules.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
@@ -373,19 +373,19 @@ uninstall_subtargets: sub-vectorMatrix-uninstall_subtargets-ordered sub-image-un
 
 sub-vectorMatrix-check_ordered:
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
-	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
+	cd vectorMatrix/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/vectorMatrix/vectorMatrix.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
 sub-image-check_ordered: sub-vectorMatrix-check_ordered 
 	@test -d image/ || mkdir -p image/
-	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
+	cd image/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/image/image.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
 sub-csg-check_ordered: sub-image-check_ordered 
 	@test -d csg/ || mkdir -p csg/
-	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
+	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
 sub-Testing-check_ordered: sub-csg-check_ordered 
 	@test -d Testing/ || mkdir -p Testing/
-	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
+	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
 sub-InterfaceCSG-check_ordered: sub-Testing-check_ordered 
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
-	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/ProjCPOA_Init/ProjCPOA_Init/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
+	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
 check: sub-vectorMatrix-check_ordered sub-image-check_ordered sub-csg-check_ordered sub-Testing-check_ordered sub-InterfaceCSG-check_ordered
 install: install_subtargets  FORCE
 

@@ -20,6 +20,7 @@ public:
     //Commence à 0
 
     Vec3f operator*(const Vec3f& vector) const;
+    Vec3f operator*(const Vec2f& vector) const;
 
     //Opérations
 

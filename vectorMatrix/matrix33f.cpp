@@ -25,6 +25,15 @@ Vec3f Matrix33f::operator*(const Vec3f& vector) const
     return result;
 }
 
+Vec3f Matrix33f::operator*(const Vec2f& vector) const
+{
+    Vec3f result;
+    result.setX(m_tab[0].X()*vector.X()+m_tab[0].Y()*vector.Y());
+    result.setY(m_tab[1].X()*vector.X()+m_tab[1].Y()*vector.Y());
+    result.setZ(1);
+    return result;
+}
+
 //====================================================================================================================================
 //Opérations
 

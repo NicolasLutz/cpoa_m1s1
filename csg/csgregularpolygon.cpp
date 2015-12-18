@@ -39,7 +39,17 @@ CsgRegularPolygon& CsgRegularPolygon::operator++(int)
 //----------------------------------------------------------------------------
 //Opérations//
 
-bool CsgRegularPolygon::isInside(const Vec2f &vertice) const
+bool CsgRegularPolygon::intersects(const Vec2f &vertice) const
 {
     return false; //TODO
+}
+
+void CsgRegularPolygon::T_apply()
+{
+    CsgPrimitive::T_apply();
+}
+
+void CsgRegularPolygon::T_reset()
+{
+    CsgPrimitive::T_reset();
 }

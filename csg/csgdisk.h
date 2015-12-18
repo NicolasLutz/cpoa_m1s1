@@ -12,14 +12,17 @@ public:
     virtual ~CsgDisk();
 
     //Accesseurs//
-    const float &Radius() const;
+    const float &Rx() const;
+    const float &Ry() const;
 
     //Opérations//
-    bool isInside(const Vec2f &vertice) const;
-
+    bool intersects(const Vec2f &vertice) const;
+    void T_apply();
+    void T_reset();
 
 private:
-    float m_radius;
+    float m_rx;
+    float m_ry;
 };
 
 #endif // CSGDISK_H

@@ -6,7 +6,7 @@
 
 QT       += core gui opengl widgets
 
-#greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = InterfaceCSG
 TEMPLATE = app
@@ -30,6 +30,6 @@ SOURCES += main.cpp\
 		   renderImg.cpp
 
 HEADERS  += mainwindow.h \
-			renderImg.h
+            renderImg.h
 
 FORMS    += mainwindow.ui

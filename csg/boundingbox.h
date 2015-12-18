@@ -40,7 +40,11 @@ public:
     //Opérations//
 
     bool collides(const BoundingBox &other) const;
-    std::pair<Vec3f, Vec3f> transform(const Matrix33f &trMatrix) const;
+    //std::pair<Vec3f, Vec3f> transform(const Matrix33f &trMatrix) const;
+
+    void rotate(float rad);
+    void translate(float tx, float ty);
+    void scale(float vx, float vy);
 
 private:
 

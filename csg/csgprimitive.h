@@ -14,21 +14,23 @@ public:
     virtual ~CsgPrimitive();
 
     //Accesseurs//
-    Vec2f&   Origin();
     const Vec2f& Origin() const;
     const Matrix33f& T_Matrix() const;
 
     //Opérations//
-    virtual bool isInside(const Vec2f& other) const=0;
+    virtual bool intersects(const Vec2f& other) const=0;
 
     //Transformations//
-    void T_reset();
+    virtual void T_apply();
+    virtual void T_reset();
     void T_rotate(float rad);
     void T_translate(float tx, float ty);
     void T_scale(float vx, float vy);
 
 private:
     Vec2f m_origin;
+
+protected:
     Matrix33f m_T_matrix;
 };
 

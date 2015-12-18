@@ -27,6 +27,7 @@ public:
     const float &X() const;
     const float &Y() const;
     const float &Z() const;
+    Vec2f XY() const;
 
     //Setters
 

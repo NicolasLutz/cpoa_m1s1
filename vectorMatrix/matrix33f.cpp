@@ -7,13 +7,11 @@
 
 Matrix33f::Matrix33f() : Array<3, Vec3f>()
 {
-
+    setId();
 }
 
 Matrix33f::Matrix33f(const Matrix33f &other) : Array<3, Vec3f>(other)
-{
-
-}
+{}
 
 //====================================================================================================================================
 //Opérateurs
@@ -33,7 +31,6 @@ Vec3f Matrix33f::operator*(const Vec3f& vector) const
 void Matrix33f::setInvert()
 {
     Matrix33f m;
-    //Le compilo devrait pouvoir optimiser ça
     float det   =m_tab[0].X()*(m_tab[1].Y()*m_tab[2].Z()-m_tab[2].Y()*m_tab[1].Z())
                 -m_tab[0].Y()*(m_tab[1].X()*m_tab[2].Z()-m_tab[2].X()*m_tab[1].Z())
                 +m_tab[0].Z()*(m_tab[1].X()*m_tab[2].Y()-m_tab[2].X()*m_tab[1].Y());

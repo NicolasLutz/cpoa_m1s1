@@ -12,6 +12,7 @@ public:
     //Constructeurs//
     CsgNode();
     CsgNode(const CsgNode &other);
+    CsgNode(const std::string &label, CsgNode *left=NULL, CsgNode *right=NULL);
     virtual ~CsgNode();
 
     //Accesseurs//
@@ -25,7 +26,14 @@ public:
     //Setteurs
     void setLeft(CsgNode *left);
     void setRight(CsgNode *right);
+    void setLabel(const std::string &label);
     //void setParent(CsgNode *parent);
+
+    //Transformations//
+    virtual void T_reset()=0;
+    virtual void T_rotate(float rad)=0;
+    virtual void T_translate(float tx, float ty)=0;
+    virtual void T_scale(float vx, float vy)=0;
 
 private:
     static unsigned int s_count;

@@ -15,9 +15,9 @@
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow),
-//	m_currentNode(NULL),
-//	m_prim(NULL),
-//	m_oper(NULL),
+    m_currentNode(NULL),
+    m_prim(NULL),
+    m_oper(NULL),
 	m_graphTextEdit(NULL),
 	m_stopSignal(false)
 
@@ -100,13 +100,23 @@ void MainWindow::createPrimtive()
 	int sides = ui->nb_sides->value();
 
 // VOTRE CODE ICI : primitive creation
-//	m_currentNode = ??
+    switch(prim)
+    {
+        case 0:
+            m_currentNode = new CsgDisk();
+            break;
+        case 1:
+            m_currentNode = new CsgRegularPolygon();
+            break;
+        default:
+            std::cerr << "unknown operation" << std::endl;
+            break;
+    }
 
 	drawTree();
-//	ui->currentNode->setValue(??); // recupere l'id du noeud cree
+    ui->currentNode->setValue(m_currentNode->Id()); // recupere l'id du noeud cree
 	updateTextGraph();
 }
-
 
 void MainWindow::createOperation()
 {
@@ -173,11 +183,25 @@ void MainWindow::resetTransfoWidgets()
 
 void MainWindow::resetTransfo()
 {
-	// reaffecte la tranfo sauvée à la primitive courante (si primitive)
-	// VOTRE CODE ICI
-
-	// reaffecte les transfos des primitives descendentes de l'operation courante
-	// VOTRE CODE ICI
+    CsgPrimitive *currentPrNode;
+    CsgOperation *currentOpNode;
+    CsgNode *saveCurrentNode=m_currentNode;
+    if((currentPrNode=dynamic_cast<CsgPrimitive *>(m_currentNode))!=NULL)
+    {
+        // reaffecte la tranfo sauvée à la primitive courante (si primitive)
+        // VOTRE CODE ICI
+        currentPrNode->T_reset();
+    }
+    else if((currentOpNode=dynamic_cast<CsgOperation *>(m_currentNode))!=NULL)
+    {
+        // reaffecte les transfos des primitives descendentes de l'operation courante
+        // VOTRE CODE ICI
+        m_currentNode=saveCurrentNode->Left();
+        resetTransfo();
+        m_currentNode=saveCurrentNode->Right();
+        resetTransfo();
+        m_currentNode=saveCurrentNode;
+    }
 	resetTransfoWidgets();
 }
 
@@ -364,7 +388,7 @@ void MainWindow::drawTree()
 
 	// VOTRE CODE ICI (trace le graph dans l'image de m_render
 
-	if (ui->checkBox_drawCurrent->isChecked()/* && m_currentNode!=NULL*/)
+    if (ui->checkBox_drawCurrent->isChecked() && m_currentNode!=NULL)
 	{
 		// OPTION: trace le noeud courant dans l'image de m_render
 		// VOTRE CODE ICI
@@ -475,4 +499,3 @@ GraphTextEdit::GraphTextEdit()
 	font.setFixedPitch (true);
 	this->setFont (font);
 }
-

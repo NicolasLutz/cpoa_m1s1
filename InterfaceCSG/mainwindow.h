@@ -6,8 +6,11 @@
 #include <QKeyEvent>
 
 #include "renderImg.h"
-//#include "csgPrimitive.h"
-//#include "csgTree.h"
+#include "csgtree.h"
+#include "boundingbox.h"
+#include "csgdisk.h"
+#include "csgregularpolygon.h"
+#include "csgoperation.h"
 
 #include <map>
 
@@ -42,33 +45,33 @@ class MainWindow : public QMainWindow
 
 private:
 	Ui::MainWindow *ui;
-	RenderImg* m_render;
+    RenderImg *m_render;
 
 protected:
 	/// current selected node
-//	CsgNode* m_currentNode;
+    CsgNode *m_currentNode;
 
-//	/// current primitive (could be NULL)
-//	CsgPrimitive * m_prim;
+    /// current primitive (could be NULL)
+    CsgPrimitive *m_prim;
 
-//	/// current operation (could be NULL)
-//	CsgOperation * m_oper;
+    /// current operation (could be NULL)
+    CsgOperation *m_oper;
 
-//	/// the CSG tree
-//	CsgTree m_tree;
+    /// the CSG tree
+    CsgTree m_tree;
 
 	/// Bounding Box to draw
-//	BoundingBox m_bb;
+    BoundingBox m_bb;
 
 	/// widget for ascii art grapg drawing
-	GraphTextEdit* m_graphTextEdit;
+    GraphTextEdit *m_graphTextEdit;
 
 	/// current transfo matrix for storing current primitive matrix
-//	Matrix33f m_transfo;
+    Matrix33f m_transfo;
 
-//	std::vector<Matrix33f> m_transfos;
-//	std::vector<CsgPrimitive*> m_prims;
-//	Vec2f m_centerSelection;
+    std::vector<Matrix33f> m_transfos;
+    std::vector<CsgPrimitive *> m_prims;
+    Vec2f m_centerSelection;
 
 	/// just to avoid ping-pong signal
 	bool m_stopSignal;
@@ -108,8 +111,6 @@ public slots:
 	void checkDrawCurrent();
 	void currentNodeChanged(int id);
 	void nodeTextSelected(bool);
-	
-
 };
 
 #endif // MAINWINDOW_H

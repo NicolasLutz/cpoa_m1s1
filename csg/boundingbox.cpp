@@ -5,26 +5,19 @@
 
 BoundingBox::BoundingBox() :
     m_xy1xy2()
-{
-}
+{}
 
 BoundingBox::BoundingBox(const BoundingBox &other) :
     m_xy1xy2(other.XY1(), other.XY2())
-{
-
-}
+{}
 
 BoundingBox::BoundingBox(float x1, float y1, float x2, float y2) :
     m_xy1xy2(Vec2f(x1, y1), Vec2f(x2, y2))
-{
-
-}
+{}
 
 BoundingBox::BoundingBox(const std::pair<Vec2f, Vec2f>& xy1xy2) :
     m_xy1xy2(xy1xy2)
-{
-
-}
+{}
 
 //----------------------------------------------------------------------------
 //Accesseurs//
@@ -112,7 +105,7 @@ BoundingBox BoundingBox::operator-(const BoundingBox &other) const
 {
     BoundingBox bd(*this);
     bool tall=false, eTooBig=false;
-    if(other.Y1()<=Y1() && other.Y2>=Y2())
+    if(other.Y1()<=Y1() && other.Y2()>=Y2())
     {//La boite est plus haute que this
         if(other.X2()>=X1() && other.X1()<=X1())
         {//La boite intersecte la partie gauche de this
@@ -121,7 +114,7 @@ BoundingBox BoundingBox::operator-(const BoundingBox &other) const
         }
         if(other.X1()<=X2() && other.X2()>=X2())
         {//La boite intersecte la partie droite de this
-            if(tall=true)
+            if(tall)
             {//La boite intersecte la partie gauche de this, la partie droite et est plus haute
                 eTooBig=true;
             }
@@ -144,17 +137,15 @@ BoundingBox BoundingBox::operator-(const BoundingBox &other) const
     }
     if(eTooBig)
     {
-        bd.setXY1(0, 0);
-        bd.setXY2(0, 0);
+        bd.setXY1(Vec2f(0, 0));
+        bd.setXY2(Vec2f(0, 0));
     }
     return bd;
 }
 
-
-
 BoundingBox BoundingBox::operator^(const BoundingBox &other) const
 {
-    BoundingBox bd();
+    BoundingBox bd;
     if(collides(other))
     {
         bd.setX1(std::max(X1(), other.X1()));
@@ -169,7 +160,7 @@ BoundingBox BoundingBox::operator^(const BoundingBox &other) const
 //----------------------------------------------------------------------------
 //Opérations//
 
-bool collides(const BoundingBox &other) const
+bool BoundingBox::collides(const BoundingBox &other) const
 {
     return (std::abs(X1() - other.X1()) * 2 < std::abs(X1()-X2())+std::abs(other.X1()-other.X2()) &&
             (std::abs(Y1() - other.Y1()) * 2 < std::abs(Y1()-Y2())+std::abs(other.Y1()-other.Y2())));

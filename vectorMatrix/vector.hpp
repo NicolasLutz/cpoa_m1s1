@@ -2,6 +2,7 @@
 #define VECTOR_HPP
 
 #include "array.hpp"
+#include <cmath>
 
 template<size_t size, typename T> class Vector : public Array<size, T>
 {
@@ -10,10 +11,9 @@ public:
     //Constructeurs//
 
     Vector();
-
     Vector(const Vector<size, T> &vector);
 
-    //Opérateurs
+    //Opérateurs//
 
     Vector<size, T> operator+(const Vector<size, T> &other) const;
     Vector<size, T>& operator+=(const Vector<size, T> &other);
@@ -26,6 +26,10 @@ public:
 
     Vector<size, T> operator/(T& s) const;
     Vector<size, T>& operator/=(T& s);
+
+    //Opérations//
+
+    T distance(const Vector<size, T> &other) const;
 };
 
 //------------------------------------------------
@@ -145,5 +149,17 @@ Vector<size, T>& Vector<size, T>::operator/=(T& s)
 }
 
 //====================================================================================================================================
+//Opérations//
+
+template<size_t size, typename T>
+T Vector<size, T>::distance(const Vector<size, T> &other) const
+{
+    T value=0;
+    for(unsigned int i=0; i<size; i++)
+    {
+        value+=((this->m_tab[i]-other[i])*(this->m_tab[i]-other[i]));
+    }
+    return std::sqrt(value);
+}
 
 #endif // VECTOR_HPP

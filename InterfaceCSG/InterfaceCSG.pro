@@ -16,12 +16,12 @@ QMAKE_CXXFLAGS += -Wall
 INCLUDEPATH += ../vectorMatrix ../image ../csg ../particle
 
 LIBS +=  -L ../lib \
-#	-lcsg   \
-#	-limage \
-#	-lvectorMatrix \
+        -lcsg   \
+        -limage \
+        -lvectorMatrix \
 #       -lparticle 
 
-#PRE_TARGETDEPS = ../lib/*
+PRE_TARGETDEPS = ../lib/*
 
 DESTDIR = ../bin
 

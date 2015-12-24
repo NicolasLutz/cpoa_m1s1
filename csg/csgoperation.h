@@ -9,24 +9,27 @@ class CsgOperation : public CsgNode
 {
 public:
     CsgOperation();
-    CsgOperation(const std::string &label, CsgOpType_t type, CsgNode *left=NULL, CsgNode *right=NULL);
     CsgOperation(const CsgOperation &other);
+    CsgOperation(CsgOpType_t type, const std::string &label, CsgNode *left=NULL, CsgNode *right=NULL);
     virtual ~CsgOperation();
 
     //Accesseurs//
     CsgOpType_t Type() const;
+    CsgNode *Left() const;
+    CsgNode *Right() const;
+
+    //Setters//
+    void setType(CsgOpType_t type);
+    void setLeft(CsgNode *left);
+    void setRight(CsgNode *right);
 
     //Transformations//
-    void T_apply();
-    void T_reset();
-    void T_rotate(float rad);
-    void T_translate(float tx, float ty);
-    void T_scale(float vx, float vy);
-
     bool intersects(const Vec2f &vertice) const;
 
 private:
-     CsgOpType_t m_type;
+     CsgOpType_t    m_type;
+     CsgNode        *m_left;
+     CsgNode        *m_right;
 };
 
 #endif // CSGOPERATION_H

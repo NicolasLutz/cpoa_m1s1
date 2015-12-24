@@ -3,17 +3,17 @@
 unsigned int CsgNode::s_count=0;
 
 CsgNode::CsgNode() :
-    m_id(s_count++), m_label(""), m_left(NULL), m_right(NULL)
+    m_id(s_count++), m_label(""), m_parent(NULL)
 {}
 
-CsgNode::CsgNode(const std::string &label, CsgNode *left, CsgNode *right) :
-    m_id(s_count++), m_label(label), m_left(left), m_right(right)
+CsgNode::CsgNode(const std::string &label) :
+    m_id(s_count++), m_label(label), m_parent(NULL)
 {}
 
 //----------------------------------------------------------------------------
 
 CsgNode::CsgNode(const CsgNode &other) :
-    m_id(s_count++), m_label(other.Label()), m_left(other.Left()), m_right(other.Right())
+    m_id(s_count++), m_label(other.Label()), m_parent(NULL)
 {}
 
 //----------------------------------------------------------------------------
@@ -38,31 +38,17 @@ const unsigned int &CsgNode::Id() const
 
 //----------------------------------------------------------------------------
 
-CsgNode *CsgNode::Left() const
+CsgNode *CsgNode::Parent() const
 {
-    return m_left;
-}
-
-//----------------------------------------------------------------------------
-
-CsgNode *CsgNode::Right() const
-{
-    return m_right;
+    return m_parent;
 }
 
 //----------------------------------------------------------------------------
 //Setteurs//
 
-void CsgNode::setLeft(CsgNode *left)
+void CsgNode::setParent(CsgNode *parent)
 {
-    m_left=left;
-}
-
-//----------------------------------------------------------------------------
-
-void CsgNode::setRight(CsgNode *right)
-{
-    m_right=right;
+    m_parent=parent;
 }
 
 //----------------------------------------------------------------------------
@@ -71,20 +57,3 @@ void CsgNode::setLabel(const std::string &label)
 {
     m_label=label;
 }
-
-//----------------------------------------------------------------------------
-
-//TODO : is parent useful ?
-////----------------------------------------------------------------------------
-
-//CsgNode *CsgNode::Parent() const
-//{
-//    return m_parent;
-//}
-
-////----------------------------------------------------------------------------
-
-//void CsgNode::setParent(CsgNode *parent)
-//{
-//    m_parent=parent;
-//}

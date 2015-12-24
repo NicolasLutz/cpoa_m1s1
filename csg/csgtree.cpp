@@ -22,7 +22,7 @@ void CsgTree::add(CsgPrimitive *primitive)
     m_nodes.insert(std::pair<int, CsgNode *>(primitive->Id(), primitive));//direct access
 }
 
-void CsgTree::join(CsgNode *node, CsgNode *otherNode, CsgOperation *operation)
+void CsgTree::join(CsgOperation *operation, CsgNode *node, CsgNode *otherNode)
 {
     m_nodes.insert(std::pair<int, CsgNode *>(operation->Id(), operation));
     m_roots.erase(node);
@@ -32,7 +32,7 @@ void CsgTree::join(CsgNode *node, CsgNode *otherNode, CsgOperation *operation)
     operation->setRight(otherNode);
 }
 
-CsgNode *CsgTree::find(int id)
+CsgNode *CsgTree::fromId(int id)
 {
     return (*m_nodes.find(id)).second;
 }

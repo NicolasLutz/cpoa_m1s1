@@ -11,7 +11,8 @@ SOURCES += *.cpp \
 HEADERS += *.h *.hpp \
     imgGradient.h \
     image2d.hpp \
-    image2grey.h
+    image2grey.h \
+    image2d_unknownsize.hpp
 
 DESTDIR = ../lib
 

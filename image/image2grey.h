@@ -1,12 +1,12 @@
 #ifndef IMAGE2GREY_H
 #define IMAGE2GREY_H
 
-#include "image2d.hpp"
+#include "image2d_unknownsize.hpp"
 #include <fstream>
 
 #define _spc_ << ' ' <<
 
-class Image2Grey : public Image2D<unsigned char>
+class Image2Grey : public Image2D_US<unsigned char>
 {
 public:
 

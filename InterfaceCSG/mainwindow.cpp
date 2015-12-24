@@ -78,16 +78,14 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_graphTextEdit->show();
 	connect(m_graphTextEdit,SIGNAL(copyAvailable(bool)),SLOT(nodeTextSelected(bool)));
 
-//	m_transfos.reserve(16);
-//	m_prims.reserve(16);
+    m_transfos.reserve(16);
+    m_prims.reserve(16);
 }
 
 MainWindow::~MainWindow()
 {
 	delete ui;
 }
-
-
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
@@ -104,10 +102,12 @@ void MainWindow::createPrimtive()
     {
         case 0:
             m_currentNode = new CsgDisk();
+            m_tree.add((CsgDisk *)m_currentNode); //or reinterpret_cast<CsgDisk *>
             break;
         case 1:
-            m_currentNode = new CsgRegularPolygon();
-            break;
+            m_currentNode = new CsgRegularPolygon(sides);
+            m_tree.add((CsgRegularPolygon *)m_currentNode);
+        break;
         default:
             std::cerr << "unknown operation" << std::endl;
             break;
@@ -129,18 +129,21 @@ void MainWindow::createOperation()
 	std::cout << " child: "<< left << " & "<< right;
 	std::cout << std::endl;
 
-    CsgOperation* oper=NULL;
+    CsgOperation* oper=new CsgOperation();
 	switch(typeOp)
 	{
-//			Ici on recupère les deux fils à partir des identifiants et on crée le noeud operation correspondant
+//		Ici on recupère les deux fils à partir des identifiants et on crée le noeud operation correspondant
 		case 0:
-
+            oper->setType(CSG_UNION);
+            m_tree.join(oper, m_tree.fromId(left), m_tree.fromId(right));
 			break;
 		case 1:
-
+            oper->setType(CSG_INTERSECTION);
+            m_tree.join(oper, m_tree.fromId(left), m_tree.fromId(right));
 			break;
 		case 2:
-
+            oper->setType(CSG_DIF);
+            m_tree.join(oper, m_tree.fromId(left), m_tree.fromId(right));
 			break;
 		default:
 			std::cerr << "unknown operation" << std::endl;
@@ -154,7 +157,7 @@ void MainWindow::createOperation()
     if (oper != NULL)
         ui->currentNode->setValue(oper->Id());
 
-//	m_currentNode = oper;
+    m_currentNode = oper;
 
 	updateTextGraph();
 
@@ -163,7 +166,6 @@ void MainWindow::createOperation()
 /// fige la tranformation en la sauvegardant
 void MainWindow::applyTransfo()
 {
-
 	drawTree();
 }
 
@@ -185,7 +187,6 @@ void MainWindow::resetTransfo()
 {
     CsgPrimitive *currentPrNode;
     CsgOperation *currentOpNode;
-    CsgNode *saveCurrentNode=m_currentNode;
     if((currentPrNode=dynamic_cast<CsgPrimitive *>(m_currentNode))!=NULL)
     {
         // reaffecte la tranfo sauvée à la primitive courante (si primitive)
@@ -196,11 +197,11 @@ void MainWindow::resetTransfo()
     {
         // reaffecte les transfos des primitives descendentes de l'operation courante
         // VOTRE CODE ICI
-        m_currentNode=saveCurrentNode->Left();
+        m_currentNode=currentOpNode->Left();
         resetTransfo();
-        m_currentNode=saveCurrentNode->Right();
+        m_currentNode=currentOpNode->Right();
         resetTransfo();
-        m_currentNode=saveCurrentNode;
+        m_currentNode=currentOpNode;
     }
 	resetTransfoWidgets();
 }
@@ -209,7 +210,7 @@ void MainWindow::transfoChanged()
 {
 	// recupere la primitive courante et lui applique les transformations
 	// VOTRE CODE ICI
-
+    applyTransfo();
 
 	// Option: de même avec un noeud Operation !
 
@@ -451,7 +452,7 @@ void MainWindow::updateTextGraph()
 
 void MainWindow::currentNodeChanged(int id)
 {
-//	m_currentNode = m_tree.fromId(id);
+    m_currentNode = m_tree.fromId(id);
 
 // VOTRE CODE ICI
 
@@ -473,7 +474,7 @@ void MainWindow::unjoinRoot()
 {
 // VOTRE CODE ICI
 
-//	m_currentNode = NULL;
+    m_currentNode = NULL;
 	updateTextGraph();
 	drawTree();
 }

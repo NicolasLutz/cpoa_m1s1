@@ -19,8 +19,8 @@ public:
     //Opérations
 
     void add(CsgPrimitive *primitive);
-    void join(CsgNode *node, CsgNode *otherNode, CsgOperation *operation);
-    CsgNode *find(int id);
+    void join(CsgOperation *operation, CsgNode *node, CsgNode *otherNode);
+    CsgNode *fromId(int id);
 
 private:
     std::set<CsgNode *, Func_CSGT_Compare>   m_roots;

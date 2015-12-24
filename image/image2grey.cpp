@@ -2,22 +2,22 @@
 
 //====================================================================================================================================
 //Constructeurs//
-Image2Grey::Image2Grey() : Image2D<unsigned char>()
+Image2Grey::Image2Grey() : Image2D_US<unsigned char>()
 {
 
 }
 
-Image2Grey::Image2Grey(const Image2Grey &other) : Image2D<unsigned char>(other)
+Image2Grey::Image2Grey(const Image2Grey &other) : Image2D_US<unsigned char>(other)
 {
 
 }
 
-Image2Grey::Image2Grey(size_t width, size_t height) : Image2D<unsigned char>(width, height)
+Image2Grey::Image2Grey(size_t width, size_t height) : Image2D_US<unsigned char>(width, height)
 {
 
 }
 
-Image2Grey::Image2Grey(const std::string &filename) : Image2D<unsigned char>()
+Image2Grey::Image2Grey(const std::string &filename) : Image2D_US<unsigned char>()
 {
     load(filename);
 }

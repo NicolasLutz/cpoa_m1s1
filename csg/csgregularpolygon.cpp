@@ -10,7 +10,7 @@ CsgRegularPolygon::CsgRegularPolygon(const CsgRegularPolygon &other) : CsgPrimit
 
 //----------------------------------------------------------------------------
 
-CsgRegularPolygon::CsgRegularPolygon(unsigned int nb_vertices) : CsgPrimitive(), m_vertices(nb_vertices)
+CsgRegularPolygon::CsgRegularPolygon(int nb_vertices) : CsgPrimitive(), m_vertices(nb_vertices)
 {}
 
 //----------------------------------------------------------------------------
@@ -21,7 +21,7 @@ CsgRegularPolygon::~CsgRegularPolygon()
 //----------------------------------------------------------------------------
 //Accesseurs//
 
-const std::vector<Vec2f>& CsgRegularPolygon::Vertices() const
+int CsgRegularPolygon::Vertices() const
 {
     return m_vertices;
 }
@@ -42,14 +42,4 @@ CsgRegularPolygon& CsgRegularPolygon::operator++(int)
 bool CsgRegularPolygon::intersects(const Vec2f &vertice) const
 {
     return false; //TODO
-}
-
-void CsgRegularPolygon::T_apply()
-{
-    CsgPrimitive::T_apply();
-}
-
-void CsgRegularPolygon::T_reset()
-{
-    CsgPrimitive::T_reset();
 }

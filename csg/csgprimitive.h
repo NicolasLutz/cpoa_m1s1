@@ -10,28 +10,30 @@ public:
     //Constructeurs//
     CsgPrimitive();
     CsgPrimitive(const CsgPrimitive &other);
-    CsgPrimitive(const Vec2f &origin);
     virtual ~CsgPrimitive();
 
     //Accesseurs//
     const Vec2f& Origin() const;
-    const Matrix33f& T_Matrix() const;
 
     //Opérations//
     virtual bool intersects(const Vec2f& other) const=0;
 
     //Transformations//
-    virtual void T_apply();
-    virtual void T_reset();
-    void T_rotate(float rad);
-    void T_translate(float tx, float ty);
-    void T_scale(float vx, float vy);
+    const Matrix33f& T_Matrix() const;      ///< gets the current matrix
+    const Matrix33f& T_Inverted() const;    ///< gets the inverted matrix
+    const Matrix33f& T_Saved() const;       ///< gets the saved matrix
+
+    void T_save();                          ///< saves the current matrix
+    void T_reset();                         ///< sets current matrix to saved
+    void T_nullify();                       ///< sets current matrix to default
+
+    void T_set(const Matrix33f &transfo);   ///< sets the current matrix
 
 private:
-    Vec2f m_origin;
-
-protected:
     Matrix33f m_T_matrix;
+    Matrix33f m_T_inverted;
+    Matrix33f m_T_saved;
+    static const Vec2f sc_origin;
 };
 
 #endif // CSGPRIMITIVE_H

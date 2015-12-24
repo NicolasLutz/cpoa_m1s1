@@ -16,6 +16,24 @@ Matrix33f::Matrix33f(const Matrix33f &other) : Array<3, Vec3f>(other)
 //====================================================================================================================================
 //Opérateurs
 
+Matrix33f Matrix33f::operator*(const Matrix33f& matrix) const
+{
+    Matrix33f result;
+    for(unsigned int i=0; i<3; i++)
+    {
+        for(unsigned int j=0; j<3; j++)
+        {
+            result[i][j]=0;
+            for(unsigned int k=0; k<3; k++)
+            {
+                result[i][j]+=(m_tab[i][k]*matrix[k][j]);
+            }
+        }
+    }
+    return result;
+}
+
+
 Vec3f Matrix33f::operator*(const Vec3f& vector) const
 {
     Vec3f result;
@@ -25,19 +43,18 @@ Vec3f Matrix33f::operator*(const Vec3f& vector) const
     return result;
 }
 
-Vec3f Matrix33f::operator*(const Vec2f& vector) const
+Vec2f Matrix33f::operator*(const Vec2f& vector) const
 {
-    Vec3f result;
+    Vec2f result;
     result.setX(m_tab[0].X()*vector.X()+m_tab[0].Y()*vector.Y());
     result.setY(m_tab[1].X()*vector.X()+m_tab[1].Y()*vector.Y());
-    result.setZ(1);
     return result;
 }
 
 //====================================================================================================================================
 //Opérations
 
-void Matrix33f::setInvert()
+Matrix33f Matrix33f::invert() const
 {
     Matrix33f m;
     float det   =m_tab[0].X()*(m_tab[1].Y()*m_tab[2].Z()-m_tab[2].Y()*m_tab[1].Z())
@@ -56,8 +73,8 @@ void Matrix33f::setInvert()
         m[2][0]=(m_tab[1].X() * m_tab[2].Y() - m_tab[2].X() * m_tab[1].Y())/det;
         m[2][1]=-(m_tab[0].X() * m_tab[2].Y() - m_tab[2].X() * m_tab[0].Y())/det;
         m[2][2]=(m_tab[0].X() * m_tab[1].Y() - m_tab[1].X() * m_tab[0].Y())/det;
-        (*this)=m;
     }
+    return m;
 }
 
 //====================================================================================================================================

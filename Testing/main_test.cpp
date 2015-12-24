@@ -67,10 +67,9 @@ void testMatrix33f()
     Vec3f vec3(1,-2,0.5);
     Vec3f res=mat*vec3;
     std::cout << res << std::endl; //resultat correct : http://www.anyflo.com/bret/cours/math/ma_12.jpg
-    matCopy.setInvert();
+    matCopy=matCopy.invert();
     std::cout << matCopy << std::endl; //determinant nul, pas de changement
     matCopy[1].setY(10);
-    matCopy.setInvert();
     std::cout << matCopy << std::endl; //http://calculis.net/matrice-invers
 }
 
@@ -78,7 +77,7 @@ void testMatrix33f()
 
 void testImage2D()
 {
-    Image2D<float> img(1,10);
+    Image2D_US<float> img(1,10);
     float f=0.2f;
     img.setPixel(f,0,2);
     std::cout << img.getPixel(0,2) << std::endl;

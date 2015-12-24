@@ -9,11 +9,11 @@ class CsgRegularPolygon : public CsgPrimitive
 public:
     CsgRegularPolygon();
     CsgRegularPolygon(const CsgRegularPolygon &other);
-    CsgRegularPolygon(unsigned int nb_vertices);
+    CsgRegularPolygon(int nb_vertices);
     virtual ~CsgRegularPolygon();
 
     //Accesseurs//
-    const std::vector<Vec2f>& Vertices() const;
+    int Vertices() const;
 
     //Opérateurs//
     CsgRegularPolygon& operator++();
@@ -21,11 +21,9 @@ public:
 
     //Opérations//
     bool intersects(const Vec2f &vertice) const;
-    void T_apply();
-    void T_reset();
 
 private:
-    std::vector<Vec2f> m_vertices;
+    int m_vertices;
 };
 
 #endif // CSGREGULARPOLYGON_H

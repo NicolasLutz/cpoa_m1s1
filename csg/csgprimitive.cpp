@@ -1,13 +1,15 @@
 #include "csgprimitive.h"
 
+const Vec2f CsgPrimitive::sc_origin(0,0);
+
 CsgPrimitive::CsgPrimitive():
-    CsgNode(), m_origin(0,0), m_T_matrix()
+    CsgNode(), m_T_matrix(), m_T_inverted(), m_T_saved()
 {}
 
 //----------------------------------------------------------------------------
 
 CsgPrimitive::CsgPrimitive(const CsgPrimitive &other):
-    CsgNode(other), m_origin(other.Origin()), m_T_matrix(other.T_Matrix())
+    CsgNode(other), m_T_matrix(other.T_Matrix()), m_T_inverted(other.T_Inverted()), m_T_saved(other.T_Saved())
 {}
 
 //----------------------------------------------------------------------------
@@ -20,36 +22,55 @@ CsgPrimitive::~CsgPrimitive()
 
 const Vec2f& CsgPrimitive::Origin() const
 {
-    return m_origin;
+    return sc_origin;
 }
+
+//----------------------------------------------------------------------------
+//Transformations//
 
 const Matrix33f& CsgPrimitive::T_Matrix() const
 {
     return m_T_matrix;
 }
 
-void CsgPrimitive::T_apply()
+const Matrix33f& CsgPrimitive::T_Inverted() const
 {
-    m_origin = (m_T_matrix*m_origin).XY();
+    return m_T_inverted;
+}
+
+const Matrix33f& CsgPrimitive::T_Saved() const
+{
+    return m_T_saved;
+}
+
+//----------------------------------------------------------------------------
+
+void CsgPrimitive::T_save()
+{
+    m_T_saved=m_T_matrix;
 }
 
 void CsgPrimitive::T_reset()
 {
+    m_T_matrix = m_T_saved;
+    m_T_inverted = m_T_saved.invert();
+}
+
+void CsgPrimitive::T_nullify()
+{
     m_T_matrix.setId();
-    m_origin=Vec2f(0,0);
+    m_T_inverted.setId();
+    m_T_saved.setId();
 }
 
-void CsgPrimitive::T_rotate(float rad)
+//----------------------------------------------------------------------------
+
+void CsgPrimitive::T_set(const Matrix33f &transfo)
 {
-    m_T_matrix.addRotation(rad);
+    m_T_matrix=transfo;
+    m_T_inverted=transfo.invert();
 }
 
-void CsgPrimitive::T_translate(float tx, float ty)
-{
-    m_T_matrix.addTranslation(tx,ty);
-}
+//----------------------------------------------------------------------------
+//Opérations//
 
-void CsgPrimitive::T_scale(float vx, float vy)
-{
-    m_T_matrix.addScaling(vx, vy);
-}

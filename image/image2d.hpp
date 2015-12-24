@@ -5,8 +5,10 @@
 #include <cstdio>
 #include <cstring>
 #include <stdexcept>
+#include <iterator>
+#include "array.hpp"
 
-template<typename T> class Image2D
+template<size_t width, size_t height, typename T> class Image2D : public Array<width*height, T>
 {
 public:
 
@@ -14,15 +16,13 @@ public:
 
     Image2D();
 
-    Image2D(const Image2D<T> &other);
-
-    Image2D(size_t width, size_t height);
+    Image2D(const Image2D<width, height, T> &other);
 
     virtual ~Image2D();
 
     //Opérateurs//
 
-    Image2D& operator=(const Image2D<T> &other);
+    Image2D& operator=(const Image2D<width, height, T> &other);
 
     //Accesseurs//
 
@@ -30,115 +30,53 @@ public:
 
     void setPixel(const T& pixel, unsigned int i, unsigned int j);
 
-    size_t getWidth() const;
-
-    size_t getHeight() const;
-
-    const T* getArray() const;
-
     //Opérations//
 
-    void exchangeWith(Image2D<T> &other); //pourquoi faire ? TODO
+    void exchangeWith(Image2D<width, height, T> &other); //pourquoi faire ? TODO
 
-    //Image2D<T> crop(int start, int finish) ?? TODO
-
-protected:
-
-    size_t m_width;
-    size_t m_height;
-    T *m_tab;
+    //Image2D<width, height, T> crop(int start, int finish) ?? TODO
 
 };
 
 //====================================================================================================================================
 //Constructeurs//
 
-template<typename T>
-Image2D<T>::Image2D() :
-    m_width(0), m_height(0), m_tab(0)
+template<size_t width, size_t height, typename T>
+Image2D<width, height, T>::Image2D() :
+    Array<width*height, T>()
 {}
 
-template<typename T>
-Image2D<T>::Image2D(const Image2D<T> &other) :
-    m_width(other.getWidth()), m_height(other.getHeight()), m_tab(new T[m_width*m_height])
-{
-    memcpy(m_tab,other.getArray(),m_width*m_height*sizeof(T));
-}
-
-template<typename T>
-Image2D<T>::Image2D(size_t width, size_t height) :
-    m_width(width), m_height(height), m_tab(new T[m_width*m_height])
+template<size_t width, size_t height, typename T>
+Image2D<width, height, T>::Image2D(const Image2D<width, height, T> &other) :
+    Array<width*height, T>(other)
 {}
 
-template<typename T>
-Image2D<T>::~Image2D()
-{
-    delete m_tab;
-}
-
-//====================================================================================================================================
-//Opérateurs//
-
-template<typename T>
-Image2D<T>& Image2D<T>::operator=(const Image2D<T> &other)
-{
-    //TODO : gestion des pointeurs avec operator= ?
-    m_tab=other.getArray();
-    m_width=other.getWidth();
-    m_height=other.getHeight();
-    return (*this);
-}
+template<size_t width, size_t height, typename T>
+Image2D<width, height, T>::~Image2D()
+{}
 
 //====================================================================================================================================
 //Accesseurs//
 
-template<typename T>
-T& Image2D<T>::getPixel(unsigned int i, unsigned int j) const
+template<size_t width, size_t height, typename T>
+T& Image2D<width, height, T>::getPixel(unsigned int i, unsigned int j) const
 {
-    if(i>=m_width || j>=m_height)
-        throw std::out_of_range("argument out of bounds");
-    return m_tab[j*m_width+i];
+    return operator[](j*m_width+i);
 }
 
 //====================================================================================================================================
 
-template<typename T>
-void Image2D<T>::setPixel(const T& pixel, unsigned int i, unsigned int j)
+template<size_t width, size_t height, typename T>
+void Image2D<width, height, T>::setPixel(const T& pixel, unsigned int i, unsigned int j)
 {
-    if(i>=m_width || j>=m_height)
-        throw std::out_of_range("argument out of bounds");
-    m_tab[j*m_width+i]=pixel;
-}
-
-//====================================================================================================================================
-
-template<typename T>
-size_t Image2D<T>::getWidth() const
-{
-    return m_width;
-}
-
-//====================================================================================================================================
-
-template<typename T>
-size_t Image2D<T>::getHeight() const
-{
-    return m_height;
-}
-
-//====================================================================================================================================
-
-template<typename T>
-const T* Image2D<T>::getArray() const
-{
-    return m_tab;
+   return operator[](j*m_width+i)=pixel;
 }
 
 //====================================================================================================================================
 //Opérations//
 
-template<typename T>
-void Image2D<T>::exchangeWith(Image2D<T> &other)
+template<size_t width, size_t height, typename T>
+void Image2D<width, height, T>::exchangeWith(Image2D<width, height, T> &other)
 {
 
 }

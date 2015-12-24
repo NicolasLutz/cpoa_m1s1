@@ -19,12 +19,13 @@ public:
     //Accès à la ième ligne : Matrix33f[i]
     //Commence à 0
 
+    Matrix33f operator*(const Matrix33f& matrix) const;
     Vec3f operator*(const Vec3f& vector) const;
-    Vec3f operator*(const Vec2f& vector) const;
+    Vec2f operator*(const Vec2f& vector) const;
 
     //Opérations
 
-    void setInvert();
+    Matrix33f invert() const;
 
     void setId();
 

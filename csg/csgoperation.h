@@ -25,6 +25,7 @@ public:
 
     //Transformations//
     bool intersects(const Vec2f &vertice) const;
+    bool intersectsBBox(const Vec2f &vertice) const;
 
 private:
      CsgOpType_t    m_type;

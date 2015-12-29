@@ -3,12 +3,12 @@
 
 #include <QGLWidget>
 
-//#include "image2grey.h"
-//#include "vec2f.h"
+#include "image2grey.h"
+#include "vec2f.h"
+#include "boundingbox.h"
 //#include "particle.h"
-
-//fprward declaration
-class BoundingBox;
+#define BASE_H 512
+#define BASE_W 512
 
 class RenderImg : public QGLWidget
 {
@@ -21,9 +21,11 @@ public:
 	void loadTexture(const std::string& filename);
 	void updateDataTexture();
 
-//	Image2grey & getImg();
+    Image2Grey & getImg();
 	unsigned int getWidth();
 	unsigned int getHeight();
+
+    void toGLVec2f(Vec2f& vertice);
 
 	/**
 	 * @brief clean image
@@ -52,7 +54,6 @@ protected:
 	/// transform win coordinate in texel image coordinate
 	void coordInTexture(QMouseEvent *event, int& x, int& y);
 
-
 	// convert from image coordinate to GL coordinates (x)
 	inline float xImg2GL(float x)
 	{
@@ -62,9 +63,8 @@ protected:
 	// convert from image coordinate to GL coordinates (y)
 	inline float yImg2GL(float y)
 	{
-		return 1.0f - (2.0f*y)/float(m_heightTex-1);// minus because of GL is bottom to up and image up to boytom
+        return 1.0f - (2.0f*y)/float(m_heightTex-1);// minus because of GL is bottom to up and image up to bottom
 	}
-
 
 	/// Texture information
 	GLuint m_texture;
@@ -86,12 +86,13 @@ protected:
 
 	bool m_BBdraw;
 
-//	void drawBB(const BoundingBox& bb);
+    void drawBB(const BoundingBox& bb);
 
 	void drawSobel();
 
 //	ici les declaration de:
 //   - l'image a niveau de gris
+    Image2Grey m_img;
 //	 - l'image gradiant'
 
 //	 la fontaine de particule

@@ -28,6 +28,15 @@ const Vec2f& CsgPrimitive::Origin() const
 //----------------------------------------------------------------------------
 //Transformations//
 
+void CsgPrimitive::T_applyTransfo(float tx, float ty, float rad, float vx, float vy)
+{
+    m_T_matrix.setId();
+    m_T_matrix.addTranslation(tx, ty);
+    m_T_matrix.addScaling(vx, vy);
+    m_T_matrix.addRotation(rad);
+    m_T_inverted=m_T_matrix.invert();
+}
+
 const Matrix33f& CsgPrimitive::T_Matrix() const
 {
     return m_T_matrix;
@@ -73,4 +82,3 @@ void CsgPrimitive::T_set(const Matrix33f &transfo)
 
 //----------------------------------------------------------------------------
 //Opérations//
-

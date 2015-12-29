@@ -43,3 +43,9 @@ bool CsgRegularPolygon::intersects(const Vec2f &vertice) const
 {
     return false; //TODO
 }
+
+bool CsgRegularPolygon::intersectsBBox(const Vec2f &vertice) const
+{
+    return true;
+}
+

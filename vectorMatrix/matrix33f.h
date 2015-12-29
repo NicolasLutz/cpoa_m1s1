@@ -4,6 +4,8 @@
 #include "vec3f.h"
 #include <cmath>
 
+typedef enum{ANY_T, TRANSLATION_T, ROTATION_T, SCALING_T} transformation_t;
+
 class Matrix33f : public Array<3, Vec3f>
 {
 public:
@@ -11,7 +13,7 @@ public:
     //Constructeurs
 
     Matrix33f();
-
+    Matrix33f(transformation_t transformation, float arg1, float arg2);
     Matrix33f(const Matrix33f &other);
 
     //Opérateurs

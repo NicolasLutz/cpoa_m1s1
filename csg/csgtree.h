@@ -16,6 +16,9 @@ public:
 
     //Accesseurs
 
+    std::set<CsgNode *, Func_CSGT_Compare>& Roots();
+    std::set<CsgNode *, Func_CSGT_Compare>& Leafs();
+
     //Opérations
 
     void add(CsgPrimitive *primitive);

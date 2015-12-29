@@ -2,8 +2,8 @@
 #include <QMouseEvent>
 #include <iostream>
 
-//#include "imgGradient.h"
-//#include "boundingbox.h"
+#include "imgGradient.h"
+#include "boundingbox.h"
 
 #include <limits>
 
@@ -11,15 +11,15 @@
 RenderImg::RenderImg( QWidget *parent ):
 	QGLWidget(QGLFormat(QGL::SampleBuffers), parent),
 	m_texture(0),
-	m_widthTex(0),
-	m_heightTex(0),
-	m_ptrTex(NULL),
+    m_widthTex(BASE_W),
+    m_heightTex(BASE_H),
 	m_drawSobel(false),
-	m_BBdraw(false)
+    m_BBdraw(false),
+    m_img(m_widthTex, m_heightTex)
   // QQ INIT A AJOUTER ?
-
 {
-
+    m_img.clear();
+    m_ptrTex=m_img.getArray();
 	// VOTRE CODE ICI
 
 }
@@ -27,18 +27,21 @@ RenderImg::RenderImg( QWidget *parent ):
 
 void RenderImg::loadTexture(const std::string& filename)
 {
-	// VOTRE CODE ICI
+    m_img.load(filename);
+    m_widthTex=(int)m_img.getWidth();
+    m_heightTex=(int)m_img.getHeight();
+    m_ptrTex=m_img.getArray();
 
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, m_widthTex, m_heightTex, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, m_ptrTex);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-
-
 void RenderImg::updateDataTexture()
 {
-	// VOTRE CODE ICI
+    m_widthTex=(int)m_img.getWidth();
+    m_heightTex=(int)m_img.getHeight();
+    m_ptrTex=m_img.getArray();
 
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glTexSubImage2D(GL_TEXTURE_2D,0,0,0,m_widthTex, m_heightTex, GL_LUMINANCE, GL_UNSIGNED_BYTE, m_ptrTex);
@@ -46,15 +49,25 @@ void RenderImg::updateDataTexture()
 	updateGL();
 }
 
+Image2Grey& RenderImg::getImg()
+{
+    return m_img;
+}
 
 unsigned int RenderImg::getWidth()
 {
-	return 0; // RETURN IMAGE WIDTH
+    return m_widthTex; // RETURN IMAGE WIDTH
 }
 
 unsigned int RenderImg::getHeight()
 {
-		return 0; // RETURN IMAGE HEIGHT
+    return m_heightTex; // RETURN IMAGE HEIGHT
+}
+
+void RenderImg::toGLVec2f(Vec2f& vertice)
+{
+    vertice.setX(xImg2GL(vertice.X()));
+    vertice.setY(yImg2GL(vertice.Y()));
 }
 
 RenderImg::~RenderImg()
@@ -82,8 +95,6 @@ void RenderImg::initializeGL()
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, m_widthTex, m_heightTex, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, m_ptrTex);
 	glBindTexture(GL_TEXTURE_2D, 0);
-
-
 }
 
 void RenderImg::paintGL()
@@ -130,16 +141,16 @@ void RenderImg::resizeGL(int width, int height)
 
 void RenderImg::coordInTexture(QMouseEvent *event, int& x, int& y)
 {
-	if (m_winS == m_winW)
-	{
-		x = (float(event->x())/m_winW)*m_widthTex;
-		y = (float(event->y()-(m_winH-m_winS)/2)/m_winH)*m_heightTex;
-	}
-	else
-	{
-		x = (float(event->x()-(m_winW-m_winS)/2)/m_winH)*m_widthTex;
-		y = (float(event->y())/m_winH)*m_heightTex;
-	}
+    if (m_winS == m_winW)
+    {
+        x = (float(event->x())/m_winW)*m_widthTex;
+        y = (float(event->y()-(m_winH-m_winS)/2)/m_winH)*m_heightTex;
+    }
+    else
+    {
+        x = (float(event->x()-(m_winW-m_winS)/2)/m_winH)*m_widthTex;
+        y = (float(event->y())/m_winH)*m_heightTex;
+    }
 }
 
 
@@ -157,7 +168,7 @@ void RenderImg::mousePressEvent(QMouseEvent *event)
 	if (m_state_modifier & Qt::ControlModifier)
 		std::cout << "     with Ctrl" << std::endl;
 
-
+    makeCurrent();
 	paintGL();
 
 	glPointSize(4.0f);
@@ -178,12 +189,12 @@ void RenderImg::mousePressEvent(QMouseEvent *event)
 
 void RenderImg::mouseReleaseEvent(QMouseEvent *event)
 {
-//	int x,y;
-//	coordInTexture(event, x, y);
-//	m_lastPos.setX(x);
-//	m_lastPos.setY(y);
+    int x,y;
+    coordInTexture(event, x, y);
+    m_lastPos.setX(x);
+    m_lastPos.setY(y);
 
-//	std::cout << " RELEASE in texture "<< x << " / "<< y << std::endl;
+    std::cout << " RELEASE in texture "<< x << " / "<< y << std::endl;
 
 }
 
@@ -260,16 +271,13 @@ void RenderImg::drawSobel()
 }
 
 
-
-/*
 void RenderImg::drawBB(const BoundingBox& bb)
 {
 	glBegin(GL_LINE_LOOP);
 	glColor3f(1.0f,0.5f,0.5f);
-//	glVertex2f( xImg2GL(??), yImg2GL(??) );
-//	glVertex2f( xImg2GL(??), yImg2GL(??) );
-//	glVertex2f( xImg2GL(??), yImg2GL(??) );
-//	glVertex2f( xImg2GL(??), yImg2GL(??) );
+    glVertex2f( xImg2GL(bb.X1()), yImg2GL(bb.Y1()) );
+    glVertex2f( xImg2GL(bb.X1()), yImg2GL(bb.Y2()) );
+    glVertex2f( xImg2GL(bb.X2()), yImg2GL(bb.Y2()) );
+    glVertex2f( xImg2GL(bb.X2()), yImg2GL(bb.Y1()) );
 	glEnd();
 }
-*/

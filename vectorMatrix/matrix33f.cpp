@@ -10,6 +10,24 @@ Matrix33f::Matrix33f() : Array<3, Vec3f>()
     setId();
 }
 
+Matrix33f::Matrix33f(transformation_t transformation, float arg1, float arg2) : Array<3, Vec3f>()
+{
+    switch(transformation)
+    {
+        case TRANSLATION_T:
+            setTranslation(arg1, arg2);
+            break;
+        case ROTATION_T:
+            setRotation(arg1);
+            break;
+        case SCALING_T:
+            setScaling(arg1, arg2);
+            break;
+        default:
+            setId();
+    }
+}
+
 Matrix33f::Matrix33f(const Matrix33f &other) : Array<3, Vec3f>(other)
 {}
 
@@ -46,8 +64,8 @@ Vec3f Matrix33f::operator*(const Vec3f& vector) const
 Vec2f Matrix33f::operator*(const Vec2f& vector) const
 {
     Vec2f result;
-    result.setX(m_tab[0].X()*vector.X()+m_tab[0].Y()*vector.Y());
-    result.setY(m_tab[1].X()*vector.X()+m_tab[1].Y()*vector.Y());
+    result.setX(m_tab[0].X()*vector.X()+m_tab[0].Y()*vector.Y()+m_tab[0].Z()*1.0f);
+    result.setY(m_tab[1].X()*vector.X()+m_tab[1].Y()*vector.Y()+m_tab[1].Z()*1.0f);
     return result;
 }
 
@@ -115,12 +133,14 @@ void Matrix33f::setTranslation(float tx, float ty)
 
 void Matrix33f::setRotation(float rad)
 {
-    m_tab[0][0]=cos(rad);
-    m_tab[0][1]=sin(rad);
+    float cosinus=cos(rad);
+    float sinus=sin(rad);
+    m_tab[0][0]=cosinus;
+    m_tab[0][1]=sinus;
     m_tab[0][2]=0;
 
-    m_tab[1][0]=-sin(rad);
-    m_tab[1][1]=cos(rad);
+    m_tab[1][0]=-sinus;
+    m_tab[1][1]=cosinus;
     m_tab[1][2]=0;
 
     m_tab[2][0]=0;
@@ -150,31 +170,23 @@ void Matrix33f::setScaling(float vx, float vy)
 
 void Matrix33f::addTranslation(float tx, float ty)
 {
-    m_tab[0][2]=m_tab[0][2]+tx;
-    m_tab[1][2]=m_tab[1][2]+ty;
+    Matrix33f m(TRANSLATION_T, tx, ty);
+    *this=m*(*this);
 }
 
 //====================================================================================================================================
 
 void Matrix33f::addRotation(float rad)
 {
-    float cosinus=cos(rad);
-    float sinus=sin(rad);
-    //première ligne
-    m_tab[0][0]=m_tab[0][0]*cosinus+m_tab[1][0]*sinus;
-    m_tab[0][1]=m_tab[0][1]*cosinus+m_tab[1][1]*sinus;
-    m_tab[0][2]=m_tab[0][2]*cosinus+m_tab[1][2]*sinus;
-
-    //seconde ligne
-    m_tab[1][0]=m_tab[0][0]*-sinus+m_tab[1][0]*cosinus;
-    m_tab[1][1]=m_tab[0][1]*-sinus+m_tab[1][1]*cosinus;
-    m_tab[1][2]=m_tab[0][2]*-sinus+m_tab[1][2]*cosinus;
+    Matrix33f m(ROTATION_T, rad, 0);
+    *this=m*(*this);
 }
 
 //====================================================================================================================================
 
 void Matrix33f::addScaling(float vx, float vy)
 {
+    /*//example of a more optimized version bellow
     //première ligne
     m_tab[0][0]*=vx;
     m_tab[0][1]*=vx;
@@ -184,6 +196,9 @@ void Matrix33f::addScaling(float vx, float vy)
     m_tab[1][0]*=vy;
     m_tab[1][1]*=vy;
     m_tab[1][2]*=vy;
+    */
+    Matrix33f m(SCALING_T, vx, vy);
+    *this=m*(*this);
 }
 
 //====================================================================================================================================

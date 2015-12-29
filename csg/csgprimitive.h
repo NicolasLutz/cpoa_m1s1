@@ -17,8 +17,12 @@ public:
 
     //Opérations//
     virtual bool intersects(const Vec2f& other) const=0;
+    virtual bool intersectsBBox(const Vec2f &vertice) const=0;
 
     //Transformations//
+    void T_applyTransfo(float tx, float ty,
+                        float rad,
+                        float vx, float vy); ///< sets transfo
     const Matrix33f& T_Matrix() const;      ///< gets the current matrix
     const Matrix33f& T_Inverted() const;    ///< gets the inverted matrix
     const Matrix33f& T_Saved() const;       ///< gets the saved matrix

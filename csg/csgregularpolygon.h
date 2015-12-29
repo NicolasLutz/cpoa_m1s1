@@ -21,6 +21,7 @@ public:
 
     //Opérations//
     bool intersects(const Vec2f &vertice) const;
+    bool intersectsBBox(const Vec2f &vertice) const;
 
 private:
     int m_vertices;

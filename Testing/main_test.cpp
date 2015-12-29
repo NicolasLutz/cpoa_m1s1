@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[])
 {
-    testEtudiantTp();
+    testMatrix33f();
 }
 
 void testVec2f()
@@ -67,10 +67,9 @@ void testMatrix33f()
     Vec3f vec3(1,-2,0.5);
     Vec3f res=mat*vec3;
     std::cout << res << std::endl; //resultat correct : http://www.anyflo.com/bret/cours/math/ma_12.jpg
-    matCopy=matCopy.invert();
-    std::cout << matCopy << std::endl; //determinant nul, pas de changement
+    std::cout << matCopy.invert() << std::endl; //determinant nul, pas de changement
     matCopy[1].setY(10);
-    std::cout << matCopy << std::endl; //http://calculis.net/matrice-invers
+    std::cout << matCopy.invert() << std::endl; //http://calculis.net/matrice-invers
 }
 
 //

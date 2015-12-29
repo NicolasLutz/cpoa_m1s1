@@ -15,6 +15,16 @@ CsgTree::~CsgTree()
 
 //----------------------------------------------------------------------------
 
+std::set<CsgNode *, Func_CSGT_Compare>& CsgTree::Roots()
+{
+    return m_roots;
+}
+
+std::set<CsgNode *, Func_CSGT_Compare>& CsgTree::Leafs()
+{
+    return m_leafs;
+}
+
 void CsgTree::add(CsgPrimitive *primitive)
 {
     m_roots.insert(primitive);
@@ -34,5 +44,6 @@ void CsgTree::join(CsgOperation *operation, CsgNode *node, CsgNode *otherNode)
 
 CsgNode *CsgTree::fromId(int id)
 {
-    return (*m_nodes.find(id)).second;
+    std::map<int, CsgNode *>::iterator it=m_nodes.find(id);
+    return it!=m_nodes.end() ? (*it).second : NULL;
 }

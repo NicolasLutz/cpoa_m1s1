@@ -1,15 +1,15 @@
 #include "csgoperation.h"
 
 CsgOperation::CsgOperation() :
-    m_type(CSG_NO_OPERATION), CsgNode(), m_left(NULL), m_right(NULL)
+    CsgNode(), m_type(CSG_NO_OPERATION), m_left(NULL), m_right(NULL)
 {}
 
 CsgOperation::CsgOperation(CsgOpType_t type, const std::string &label, CsgNode *left, CsgNode *right) :
-    m_type(type), CsgNode(label), m_left(left), m_right(right)
+    CsgNode(label), m_type(type), m_left(left), m_right(right)
 {}
 
 CsgOperation::CsgOperation(const CsgOperation &other) :
-    m_type(other.Type()), CsgNode(other), m_left(other.Left()), m_right(other.Right())
+    CsgNode(other), m_type(other.Type()), m_left(other.Left()), m_right(other.Right())
 {}
 
 //----------------------------------------------------------------------------
@@ -61,20 +61,28 @@ void CsgOperation::setRight(CsgNode *right)
 bool CsgOperation::intersects(const Vec2f &vertice) const
 {
     bool itDoes=false;
-    switch(this->Type())
+    if(intersectsBBox(vertice))
     {
-        case CSG_UNION:
-            itDoes=Left()->intersects(vertice) || Right()->intersects(vertice);
-            break;
-        case CSG_INTERSECTION:
-            itDoes=Left()->intersects(vertice) && Right()->intersects(vertice);
-            break;
-        case CSG_DIF:
-            itDoes=Left()->intersects(vertice) && !Right()->intersects(vertice);
-            break;
-        default:
-            itDoes=false;
-            break;
+        switch(this->Type())
+        {
+            case CSG_UNION:
+                itDoes=Left()->intersects(vertice) || Right()->intersects(vertice);
+                break;
+            case CSG_INTERSECTION:
+                itDoes=Left()->intersects(vertice) && Right()->intersects(vertice);
+                break;
+            case CSG_DIF:
+                itDoes=Left()->intersects(vertice) && !Right()->intersects(vertice);
+                break;
+            default:
+                itDoes=false;
+                break;
+        }
     }
+    return itDoes;
 }
 
+bool CsgOperation::intersectsBBox(const Vec2f &vertice) const
+{
+    return true;
+}

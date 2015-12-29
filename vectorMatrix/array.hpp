@@ -33,52 +33,56 @@ public:
 
     //Itérateurs//
 
-    class iterator //credits for iterator example goes to https://gist.github.com/jeetsukumaran/307264
+    class iterator
     {
     public:
         typedef iterator self_type;
-        typedef T   value_type;
-        typedef std::bidirectional_iterator_tag iterator_category;
         typedef int difference_type;
+        typedef T   value_type;
+        typedef T*  pointer;
+        typedef T&  reference;
+        typedef std::bidirectional_iterator_tag iterator_category;
 
         iterator() {}
-        iterator(value_type* ptr) : ptr_(ptr) {}
+        iterator(value_type* ptr) : m_ptr(ptr) {}
 
-        inline self_type operator=(self_type other) { ptr_ = other.ptr_; return *this; }
-        inline self_type operator++() { self_type i = *this; ptr_++; return i; }
-        inline self_type operator++(int unusued) { ptr_++; return *this; }
-        inline self_type operator--() { self_type i = *this; ptr_--; return i; }
-        inline self_type operator--(int unusued) { ptr_--; return *this; }
-        inline value_type& operator*() { return *ptr_; }
-        inline value_type* operator->() { return ptr_; }
-        inline bool operator==(const self_type& other) { return ptr_ == other.ptr_; }
-        inline bool operator!=(const self_type& other) { return ptr_ != other.ptr_; }
+        inline self_type operator=(self_type other) { m_ptr = other.m_ptr; return *this; }
+        inline self_type operator++() { m_ptr++; return *this; }
+        inline self_type operator++(int unusued) { self_type i = *this; m_ptr++; return i; }
+        inline self_type operator--() { m_ptr--; return *this; }
+        inline self_type operator--(int unusued) { self_type i = *this; m_ptr--; return i; }
+        inline value_type& operator*() { return *m_ptr; }
+        inline value_type* operator->() { return m_ptr; }
+        inline bool operator==(const self_type& other) { return m_ptr == other.m_ptr; }
+        inline bool operator!=(const self_type& other) { return m_ptr != other.m_ptr; }
     private:
-        value_type* ptr_;
+        value_type* m_ptr;
     };
 
     class const_iterator //credits for iterator example goes to https://gist.github.com/jeetsukumaran/307264
     {
     public:
         typedef const_iterator self_type;
-        typedef T   value_type;
-        typedef std::bidirectional_iterator_tag iterator_category;
         typedef int difference_type;
+        typedef T   value_type;
+        typedef T*  pointer;
+        typedef T&  reference;
+        typedef std::bidirectional_iterator_tag iterator_category;
 
         const_iterator() {}
-        const_iterator(const value_type *ptr) : ptr_(ptr) {}
+        const_iterator(const value_type *ptr) : m_ptr(ptr) {}
 
-        inline self_type operator=(self_type other) { ptr_ = other.ptr_; return *this; }
-        inline self_type operator++() { self_type i = *this; ptr_++; return i; }
-        inline self_type operator++(int unusued) { ptr_++; return *this; }
-        inline self_type operator--() { self_type i = *this; ptr_--; return i; }
-        inline self_type operator--(int unusued) { ptr_--; return *this; }
-        inline const value_type& operator*() { return *ptr_; }
-        inline const value_type* operator->() { return ptr_; }
-        inline bool operator==(const self_type& other) const { return ptr_ == other.ptr_; }
-        inline bool operator!=(const self_type& other) const { return ptr_ != other.ptr_; }
+        inline self_type operator=(self_type other) { m_ptr = other.m_ptr; return *this; }
+        inline self_type operator++() { m_ptr++; return *this; }
+        inline self_type operator++(int unusued) { self_type i = *this; m_ptr++; return i; }
+        inline self_type operator--() { m_ptr--; return *this; }
+        inline self_type operator--(int unusued) { self_type i = *this; m_ptr--; return i; }
+        inline const value_type& operator*() { return *m_ptr; }
+        inline const value_type* operator->() { return m_ptr; }
+        inline bool operator==(const self_type& other) const { return m_ptr == other.m_ptr; }
+        inline bool operator!=(const self_type& other) const { return m_ptr != other.m_ptr; }
     private:
-        const value_type* ptr_;
+        const value_type* m_ptr;
     };
 
     iterator begin();

@@ -210,6 +210,17 @@ void MainWindow::transfoChanged()
 {
 	// recupere la primitive courante et lui applique les transformations
 	// VOTRE CODE ICI
+    CsgPrimitive *currentPrNode;
+    if((currentPrNode=dynamic_cast<CsgPrimitive *>(m_currentNode))!=NULL)
+    {
+        // reaffecte la tranfo sauvée à la primitive courante (si primitive)
+        // VOTRE CODE ICI
+        float tx=ui->dsb_tx->value()/(m_render->getWidth()/2);
+        float ty=ui->dsb_ty->value()/(m_render->getHeight()/2);
+        currentPrNode->T_applyTransfo(tx, ty,
+                                      (ui->dsb_Rot->value()*M_PI)/180,
+                                      ui->dsb_sx->value(), ui->dsb_sy->value());
+    }
     applyTransfo();
 
 	// Option: de même avec un noeud Operation !
@@ -388,11 +399,24 @@ void MainWindow::drawTree()
 	m_render->clean();
 
 	// VOTRE CODE ICI (trace le graph dans l'image de m_render
+    //for(std::set<CsgNode *, Func_CSGT_Compare>::const_iterator cit=m_tree.Roots().begin(); cit!=m_tree.Roots().end(); )
 
     if (ui->checkBox_drawCurrent->isChecked() && m_currentNode!=NULL)
 	{
+        Vec2f currentVertice;
 		// OPTION: trace le noeud courant dans l'image de m_render
 		// VOTRE CODE ICI
+        Image2Grey& img=m_render->getImg();
+        //for(Image2Grey::iterator_bbox it=img.beginOf()) //w/ bb TODO
+        for(Image2Grey::iterator_bbox it=img.begin(); it!=img.end(); ++it)
+        {
+            currentVertice=it.Vertice();
+            m_render->toGLVec2f(currentVertice);
+            if(m_currentNode->intersects(currentVertice))
+                *it=255;
+            else
+                *it=0;
+        }
 
 		m_render->setBBDraw(true);
 	}
@@ -452,11 +476,11 @@ void MainWindow::updateTextGraph()
 
 void MainWindow::currentNodeChanged(int id)
 {
-    m_currentNode = m_tree.fromId(id);
 
+    m_currentNode = NULL;
 // VOTRE CODE ICI
-
 	resetTransfoWidgets();
+    m_currentNode = m_tree.fromId(id);
 	drawTree();
 }
 

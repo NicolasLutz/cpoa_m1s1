@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include "boundingbox.h"
 #include "matrix33f.h"
 
 #define _e_ 0.005 //define a floating point allowed error
@@ -19,8 +20,6 @@ public:
     //Accesseurs//
     const std::string& Label() const;
     const unsigned int& Id() const;
-    const Matrix33f& T_Matrix() const;
-
     CsgNode *Parent() const;
 
     //Setteurs
@@ -29,13 +28,14 @@ public:
 
     //Opérations//
     virtual bool intersects(const Vec2f &vertice) const=0;
-    //virtual bool intersectsBBox(const Vec2f &vertice) const=0;
+    virtual bool intersectsBBox(const Vec2f &vertice) const=0;
 
 private:
     static unsigned int s_count;
     unsigned int    m_id;
     std::string     m_label;
     CsgNode         *m_parent;
+    //BoundingBox     m_BB;
 };
 
 #endif // CSGNODE_H

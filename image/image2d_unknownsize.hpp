@@ -37,7 +37,7 @@ public:
 
     size_t getHeight() const;
 
-    const T* getArray() const;
+    T* getArray() const;
 
     //Opérations//
 
@@ -132,7 +132,7 @@ size_t Image2D_US<T>::getHeight() const
 //====================================================================================================================================
 
 template<typename T>
-const T* Image2D_US<T>::getArray() const
+T* Image2D_US<T>::getArray() const
 {
     return m_tab;
 }

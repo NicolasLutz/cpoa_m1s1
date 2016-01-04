@@ -36,15 +36,19 @@ public:
     BoundingBox operator+(const BoundingBox &other) const;
     BoundingBox operator-(const BoundingBox &other) const;
     BoundingBox operator^(const BoundingBox &other) const;
+    BoundingBox& operator=(const BoundingBox &other);
 
     //Opérations//
 
+    ///check si la bbox entre en collision avec la bbox other
     bool collides(const BoundingBox &other) const;
-    //std::pair<Vec3f, Vec3f> transform(const Matrix33f &trMatrix) const;
 
-    void rotate(float rad);
-    void translate(float tx, float ty);
-    void scale(float vx, float vy);
+    ///reset la bb avec les vecteurs v1 et v2 et applique la transformation
+    void applyTransfo(const Matrix33f &matrix, const Vec2f& v1, const Vec2f& v2);
+
+    ///translates bbox's gl vectors into img vectors, img being of width and height dimensions
+    Vec2f XY1_img(size_t width, size_t height) const;
+    Vec2f XY2_img(size_t width, size_t height) const;
 
 private:
 

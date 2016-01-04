@@ -1,3 +1,5 @@
+CONFIG += c++11
+
 TEMPLATE = subdirs
 SUBDIRS = vectorMatrix
 
@@ -7,14 +9,13 @@ SUBDIRS += image
 CONFIG += ordered
 SUBDIRS += csg
 
-#CONFIG += ordered
-#SUBDIRS += particle
+CONFIG += ordered
+SUBDIRS += particle
 
 CONFIG += ordered
 SUBDIRS += Testing
 
 CONFIG += ordered
 SUBDIRS += InterfaceCSG
-
 
 

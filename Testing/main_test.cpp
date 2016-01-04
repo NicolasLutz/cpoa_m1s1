@@ -2,6 +2,10 @@
 
 int main(int argc, char *argv[])
 {
+    testArray();
+    testVector();
+    testVec2f();
+    testVec3f();
     testMatrix33f();
 }
 
@@ -62,27 +66,30 @@ void testMatrix33f()
     mat[2][0]=7;
     mat[2][1]=8;
     mat[2][2]=9;
-
+    std::cout << "Matrice: " << mat << std::endl;
     Matrix33f matCopy=mat;
+
+    std::cout << "=: " << matCopy << std::endl;
+
     Vec3f vec3(1,-2,0.5);
     Vec3f res=mat*vec3;
-    std::cout << res << std::endl; //resultat correct : http://www.anyflo.com/bret/cours/math/ma_12.jpg
-    std::cout << matCopy.invert() << std::endl; //determinant nul, pas de changement
+    std::cout << "*(1,-2,0.5) = " << res << std::endl; //resultat correct : http://www.anyflo.com/bret/cours/math/ma_12.jpg
+    std::cout << "invert (=det nul): " << matCopy.invert() << std::endl; //determinant nul, pas de changement
     matCopy[1].setY(10);
-    std::cout << matCopy.invert() << std::endl; //http://calculis.net/matrice-invers
+    std::cout << "mat[1][1]=10 ; invert: " << matCopy.invert() << std::endl; //http://calculis.net/matrice-invers
 }
 
 //
 
 void testImage2D()
 {
-    Image2D_US<float> img(1,10);
+    Image2<float> img(1,10);
     float f=0.2f;
     img.setPixel(f,0,2);
     std::cout << img.getPixel(0,2) << std::endl;
 }
 
-void prettyBadTestImage2Grey()
+void testImage2Grey()
 {
     Image2Grey img(2,2);
     img.setPixel(0,0,0);
@@ -91,28 +98,6 @@ void prettyBadTestImage2Grey()
     img.setPixel(255,1,1);
     img.save("testSave1.pgm");
 
-    Image2Grey img2("testLoad.pgm");
+    Image2Grey img2("testSave1.pgm");
     img2.save("testSave2.pgm");
-}
-
-void testEtudiantTp()
-{
-    std::vector<Etudiant> cours1;
-    cours1.push_back(Etudiant("Moi", 21, ISI_F));
-    cours1.push_back(Etudiant("Mon voisin", 25, ISI_F));
-    cours1.push_back(Etudiant("Arthur", 23, ILC_F));
-    cours1.push_back(Etudiant("Archade", 22, RISE_F));
-
-    std::vector<Etudiant> cours2=cours1;
-
-    std::for_each(cours1.begin(), cours1.end(), E_display);
-    std::for_each(cours1.begin(), cours1.end(), Fnct_Display());
-
-    for(std::vector<Etudiant>::iterator it=cours2.begin(); it!=cours2.end(); ++it)
-    {
-        E_display(*it);
-    }
-
-    std::sort(cours1.begin(), cours1.end(), E_biggest);
-    std::for_each(cours1.begin(), cours1.end(), E_display);
 }

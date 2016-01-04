@@ -19,8 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_prim(NULL),
     m_oper(NULL),
 	m_graphTextEdit(NULL),
-	m_stopSignal(false)
-
+    m_stopSignal(false),
+    m_timer(this)
 {
 	ui->setupUi(this);
 
@@ -77,9 +77,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_graphTextEdit = new GraphTextEdit();
 	m_graphTextEdit->show();
 	connect(m_graphTextEdit,SIGNAL(copyAvailable(bool)),SLOT(nodeTextSelected(bool)));
-
-    m_transfos.reserve(16);
-    m_prims.reserve(16);
+    connect(&m_timer, SIGNAL(timeout()), this, SLOT(updateFountain()));
+    m_timer.start(50);
 }
 
 MainWindow::~MainWindow()
@@ -166,19 +165,18 @@ void MainWindow::createOperation()
 /// fige la tranformation en la sauvegardant
 void MainWindow::applyTransfo()
 {
+    CsgPrimitive *currentPrNode;
+    if((currentPrNode=dynamic_cast<CsgPrimitive *>(m_currentNode))!=NULL)
+    {
+        currentPrNode->T_save();
+    }
 	drawTree();
 }
 
 
 void MainWindow::resetTransfoWidgets()
 {
-	m_stopSignal=true;
-	ui->translationX->setValue(0);
-	ui->translationY->setValue(0);
-	ui->scaleX->setValue(0);
-	ui->scaleY->setValue(0);
-	ui->rotation->setValue(0);
-	m_stopSignal=false;
+    _setIndics();
 	transfoSliderChanged();
 }
 
@@ -203,6 +201,10 @@ void MainWindow::resetTransfo()
         resetTransfo();
         m_currentNode=currentOpNode;
     }
+    else
+    {
+        std::cerr << "Couldn't cast current node" << std::endl;
+    }
 	resetTransfoWidgets();
 }
 
@@ -221,9 +223,10 @@ void MainWindow::transfoChanged()
                                       (ui->dsb_Rot->value()*M_PI)/180,
                                       ui->dsb_sx->value(), ui->dsb_sy->value());
     }
-    applyTransfo();
-
 	// Option: de même avec un noeud Operation !
+
+    if(m_currentNode!=NULL)
+        m_render->updateBB(m_currentNode->BBox());
 
 	drawTree();
 }
@@ -287,7 +290,41 @@ void MainWindow::transfoSpinChanged()
 	m_stopSignal = false;
 
 	transfoChanged();
+}
 
+void MainWindow::_setIndics()
+{
+    CsgPrimitive *currentPrNode;
+    if((currentPrNode=dynamic_cast<CsgPrimitive *>(m_currentNode))!=NULL)
+    {
+        m_stopSignal=true;
+        ui->translationX->setValue((int)(currentPrNode->T_Matrix().Tx()*m_render->getWidth() / 2.0f));
+        ui->translationY->setValue((int)(currentPrNode->T_Matrix().Ty()*m_render->getHeight() / 2.0f));
+        ui->rotation->setValue(currentPrNode->T_Matrix().Rad()*180/M_PI);
+
+        ui->dsb_tx->setValue(ui->translationX->value());
+        ui->dsb_ty->setValue(ui->translationY->value());
+        ui->dsb_Rot->setValue(ui->rotation->value());
+
+        //Scale
+
+        ui->dsb_sx->setValue(currentPrNode->T_Matrix().Vx());
+        ui->dsb_sy->setValue(currentPrNode->T_Matrix().Vy());
+
+        double ss = ui->dsb_sx->value();
+        if (ss>=1.0)
+            ui->scaleX->setValue((ss-1.0)*S1_FACTOR);
+        else
+            ui->scaleX->setValue((1.0-1.0/ss)*S2_FACTOR);
+
+        ss = ui->dsb_sy->value();
+        if (ss>=1.0)
+            ui->scaleY->setValue((ss-1.0)*S1_FACTOR);
+        else
+            ui->scaleY->setValue((1.0-1.0/ss)*S2_FACTOR);
+
+        m_stopSignal=false;
+    }
 }
 
 #undef S1_FACTOR
@@ -312,16 +349,15 @@ void MainWindow::saveImage()
 	if (!fileName.isEmpty())
 	{
 		std::string strFN = fileName.toStdString();
-		std::cout << "Save "<< strFN << "not implemented" << std::endl;
+        m_render->getImg().save(strFN);
 	}
 }
-
 
 void MainWindow::drawSobel()
 {
 	m_render->toggleSobel();
+    m_render->updateDataTexture();
 }
-
 
 void MainWindow::loadCSG()
 {
@@ -338,11 +374,49 @@ void MainWindow::loadCSG()
 			return;
 		}
 
-	// VOTRE CODE ICI
-
-		 updateTextGraph();
-		 drawTree();
-
+        // VOTRE CODE ICI
+        m_tree.clear();
+        CsgOperation *opNode;
+        CsgPrimitive *prNode;
+        char id;
+        while(in.good())
+        {
+            in >> id;
+            opNode=NULL;
+            prNode=NULL;
+            switch(id)
+            {
+                case 'O':
+                    opNode=new CsgOperation();
+                    prNode=NULL;
+                    in >> *opNode;
+                    break;
+                case 'D':
+                    prNode=new CsgDisk();
+                    opNode=NULL;
+                    in >> *prNode;
+                    break;
+                case 'R':
+                    prNode=new CsgRegularPolygon();
+                    opNode=NULL;
+                    in >> *prNode;
+                    break;
+                default:
+                    std::cerr << "Unknown csg node identifier found: " << id << std::endl;
+                    break;
+            }
+            if(prNode!=NULL)
+            {
+                m_tree.add(prNode);
+            }
+            else if(opNode!=NULL)
+            {
+                m_tree.join(opNode, m_tree.fromId((int)opNode->Left()), m_tree.fromId((int)opNode->Right()));
+            }
+        }
+        in.close();
+        updateTextGraph();
+        drawTree();
 	}
 }
 
@@ -351,16 +425,61 @@ void MainWindow::appendCSG()
 {
 	QString fileName = QFileDialog::getOpenFileName(this,
 									tr("Open File"), QDir::currentPath(),tr("csg (*.csg);;all (*.*)"));
-	if (!fileName.isEmpty())
-	{
-		std::string strFN = fileName.toStdString();
+    if (!fileName.isEmpty())
+    {
+        std::string strFN = fileName.toStdString();
 
-	// VOTRE CODE ICI
+        std::ifstream in(strFN.c_str());
+        if (!in.good())
+        {
+            std::cerr << "Unable to open file " << strFN << std::endl;
+            return;
+        }
 
-		 updateTextGraph();
-		 drawTree();
-
-	}
+        // VOTRE CODE ICI
+        CsgOperation *opNode;
+        CsgPrimitive *prNode;
+        char id;
+        unsigned int counter=CsgNode::Counter();
+        while(in.good())
+        {
+            in >> id;
+            opNode=NULL;
+            prNode=NULL;
+            switch(id)
+            {
+                case 'O':
+                    opNode=new CsgOperation();
+                    prNode=NULL;
+                    in >> *opNode;
+                    break;
+                case 'D':
+                    prNode=new CsgDisk();
+                    opNode=NULL;
+                    in >> *prNode;
+                    break;
+                case 'R':
+                    prNode=new CsgRegularPolygon();
+                    opNode=NULL;
+                    in >> *prNode;
+                    break;
+                default:
+                    std::cerr << "Unknown csg node identifier found: " << id << std::endl;
+                    break;
+            }
+            if(prNode!=NULL)
+            {
+                m_tree.add(prNode);
+            }
+            else if(opNode!=NULL)
+            {
+                m_tree.join(opNode, m_tree.fromId(counter+(int)opNode->Left()), m_tree.fromId(counter+(int)opNode->Right()));
+            }
+        }
+        in.close();
+        updateTextGraph();
+        drawTree();
+    }
 }
 
 void MainWindow::saveCSG()
@@ -371,16 +490,27 @@ void MainWindow::saveCSG()
 	{
 		std::string strFN = fileName.toStdString();
 
-	// VOTRE CODE ICI
-
+        std::ofstream out(strFN.c_str(), std::ofstream::trunc);
+        if (!out.good())
+        {
+            std::cerr << "Unable to open/create file " << strFN << std::endl;
+            return;
+        }
+        // VOTRE CODE ICI
+        for(CsgTree::const_iterator it=m_tree.begin(); it!=m_tree.end(); ++it)
+        {
+            out << *((*it).second);
+        }
 	}
 }
 
 void MainWindow::clearCSG()
 {
 	// VOTRE CODE ICI
-
-	updateTextGraph();
+    m_tree.clear();
+    m_currentNode=NULL;
+    CsgNode::resetCounter();
+    updateTextGraph();
 	drawTree();
 }
 
@@ -388,7 +518,11 @@ void MainWindow::clearCSG()
 void MainWindow::clone()
 {
 	// VOTRE CODE ICI
-
+    if(m_currentNode!=NULL)
+    {
+        m_currentNode=m_tree.add(m_currentNode->clone());
+        ui->currentNode->setValue(m_currentNode->Id());
+    }
 	updateTextGraph();
 	drawTree();
 }
@@ -399,16 +533,17 @@ void MainWindow::drawTree()
 	m_render->clean();
 
 	// VOTRE CODE ICI (trace le graph dans l'image de m_render
-    //for(std::set<CsgNode *, Func_CSGT_Compare>::const_iterator cit=m_tree.Roots().begin(); cit!=m_tree.Roots().end(); )
-
     if (ui->checkBox_drawCurrent->isChecked() && m_currentNode!=NULL)
 	{
         Vec2f currentVertice;
 		// OPTION: trace le noeud courant dans l'image de m_render
 		// VOTRE CODE ICI
         Image2Grey& img=m_render->getImg();
-        //for(Image2Grey::iterator_bbox it=img.beginOf()) //w/ bb TODO
-        for(Image2Grey::iterator_bbox it=img.begin(); it!=img.end(); ++it)
+        Vec2f xy1_bbox=m_currentNode->BBox().XY1_img(m_render->getWidth(), m_render->getHeight());
+        Vec2f xy2_bbox=m_currentNode->BBox().XY2_img(m_render->getWidth(), m_render->getHeight());
+        Image2Grey::iterator_bbox it=img.beginOf((int)xy1_bbox.X(), (int)xy2_bbox.X(), (int)xy2_bbox.Y());
+        Image2Grey::iterator_bbox end=img.endOf((int)xy2_bbox.X(), (int)xy1_bbox.Y());
+        for(; it!=end; ++it)
         {
             currentVertice=it.Vertice();
             m_render->toGLVec2f(currentVertice);
@@ -417,13 +552,10 @@ void MainWindow::drawTree()
             else
                 *it=0;
         }
-
-		m_render->setBBDraw(true);
+        m_render->updateBB(m_currentNode->BBox());
 	}
-	else
-	{
-		m_render->setBBDraw(false);
-	}
+    else
+        m_render->setBBDraw(false);
 
 	m_render->updateDataTexture();
 }
@@ -460,9 +592,7 @@ void MainWindow::nodeTextSelected(bool sel)
 	{
 		ui->currentNode->setValue(id);
 	}
-
 }
-
 
 void MainWindow::updateTextGraph()
 {
@@ -476,11 +606,11 @@ void MainWindow::updateTextGraph()
 
 void MainWindow::currentNodeChanged(int id)
 {
-
-    m_currentNode = NULL;
 // VOTRE CODE ICI
-	resetTransfoWidgets();
+    m_currentNode = NULL;
+    resetTransfoWidgets();
     m_currentNode = m_tree.fromId(id);
+    _setIndics();
 	drawTree();
 }
 
@@ -488,16 +618,26 @@ void MainWindow::currentNodeChanged(int id)
 void MainWindow::swapLRRoot()
 {
 // VOTRE CODE ICI
-	updateTextGraph();
-	drawTree();
+    CsgOperation *currentOpNode;
+    if((currentOpNode=dynamic_cast<CsgOperation *>(m_currentNode))!=NULL)
+    {
+        currentOpNode->swap();
+        updateTextGraph();
+        drawTree();
+    }
 }
-
-
 
 void MainWindow::unjoinRoot()
 {
 // VOTRE CODE ICI
-
+    CsgOperation *currentOpNode;
+    if((currentOpNode=dynamic_cast<CsgOperation *>(m_currentNode))!=NULL)
+    {
+        currentOpNode->setLeft(NULL);
+        currentOpNode->setRight(NULL);
+        currentOpNode->setParent(NULL);
+        m_tree.removeId(currentOpNode->Id());
+    }
     m_currentNode = NULL;
 	updateTextGraph();
 	drawTree();
@@ -523,4 +663,20 @@ GraphTextEdit::GraphTextEdit()
 	font.setPointSize(11);
 	font.setFixedPitch (true);
 	this->setFont (font);
+}
+
+//Ajoutés après//
+
+void MainWindow::on_actionDraw_BB_triggered()
+{
+    m_render->toggleBBdraw();
+    if(m_currentNode!=NULL)
+        m_render->updateBB(m_currentNode->BBox());
+}
+
+void MainWindow::updateFountain()
+{
+    m_timer.stop();
+    m_render->updateFountain();
+    m_timer.start(50);
 }

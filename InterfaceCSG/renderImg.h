@@ -4,9 +4,10 @@
 #include <QGLWidget>
 
 #include "image2grey.h"
+#include "imgGradient.h"
 #include "vec2f.h"
 #include "boundingbox.h"
-//#include "particle.h"
+#include "particlesystem.h"
 #define BASE_H 512
 #define BASE_W 512
 
@@ -36,9 +37,13 @@ public:
 	* @brief update sobel image
 	*/
    void toggleSobel();
+   void toggleBBdraw();
 
-   void setBBDraw(bool v) { m_BBdraw = v;}
+   void setBBDraw(bool v) { m_drawBB = v;}
 
+   void updateBB(const BoundingBox& bb);
+
+   void updateFountain();
 
 protected:
 	/// Qt callbacks
@@ -84,19 +89,22 @@ protected:
 
 	bool m_drawSobel;
 
-	bool m_BBdraw;
-
-    void drawBB(const BoundingBox& bb);
+    bool m_drawBB;
 
 	void drawSobel();
+    void drawBB();
 
 //	ici les declaration de:
 //   - l'image a niveau de gris
     Image2Grey m_img;
 //	 - l'image gradiant'
+    Image2<Vec2f> m_gradImg;
+
+    GradientSobel m_GS;
+    BoundingBox m_bb;
 
 //	 la fontaine de particule
-//	Fountain fountain;
+    ParticleSystem m_fountain;
 };
 
 #endif // RENDERIMG_H

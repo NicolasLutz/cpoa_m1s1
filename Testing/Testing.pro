@@ -11,25 +11,21 @@
 TARGET = testing
 TEMPLATE = app
 
-QMAKE_CXXFLAGS += -Wall
-
 INCLUDEPATH += ../vectorMatrix ../image ../csg ../particle ../
 
 LIBS +=  -L ../lib \
-#	-lcsg   \
+        -lcsg   \
         -limage \
         -lvectorMatrix \
-#       -lparticle 
+#       -lparticle
 
 #PRE_TARGETDEPS = ../lib/*
 
 DESTDIR = ../bin
 
-SOURCES += main_test.cpp \
-    etudiant.cpp
+SOURCES += main_test.cpp
 
-HEADERS += main_test.h \
-    etudiant.h
+HEADERS += main_test.h
 
 # no interface for simple test
 #HEADERS  += mainwindow.h

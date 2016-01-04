@@ -14,14 +14,15 @@ RenderImg::RenderImg( QWidget *parent ):
     m_widthTex(BASE_W),
     m_heightTex(BASE_H),
 	m_drawSobel(false),
-    m_BBdraw(false),
-    m_img(m_widthTex, m_heightTex)
+    m_drawBB(false),
+    m_img(m_widthTex, m_heightTex),
+    m_GS(),
+    m_fountain(m_widthTex, m_heightTex)
   // QQ INIT A AJOUTER ?
 {
+	// VOTRE CODE ICI
     m_img.clear();
     m_ptrTex=m_img.getArray();
-	// VOTRE CODE ICI
-
 }
 
 
@@ -46,6 +47,10 @@ void RenderImg::updateDataTexture()
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glTexSubImage2D(GL_TEXTURE_2D,0,0,0,m_widthTex, m_heightTex, GL_LUMINANCE, GL_UNSIGNED_BYTE, m_ptrTex);
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+    if(m_drawSobel)
+        m_gradImg=m_GS(m_img);
+
 	updateGL();
 }
 
@@ -121,9 +126,25 @@ void RenderImg::paintGL()
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glDisable(GL_TEXTURE_2D);
 
-	// for debugging
-	if (m_drawSobel)
-		drawSobel();
+    // for debugging
+    if (m_drawSobel)
+    {
+        drawSobel();
+    }
+    if(m_drawBB)
+        drawBB();
+
+    glPointSize(4.0f);
+    glColor3f(1.0f,0,0);
+    glBegin(GL_POINTS);
+
+    // VOTRE CODE ICI : -nombre de particules- <- lol
+    for (ParticleSystem::const_iterator it=m_fountain.begin(); it!=m_fountain.end(); ++it)
+    {
+        // here get back position of each particle in ptPos
+        glVertex2f(2.0f*(*it)->getPosition().X()/m_widthTex-1.0f, -2.0f*(*it)->getPosition().Y()/m_heightTex+1.0f);
+    }
+    glEnd();
 
 }
 
@@ -137,6 +158,8 @@ void RenderImg::resizeGL(int width, int height)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glMatrixMode(GL_MODELVIEW);
+    makeCurrent();
+    updateGL();
 }
 
 void RenderImg::coordInTexture(QMouseEvent *event, int& x, int& y)
@@ -164,26 +187,15 @@ void RenderImg::mousePressEvent(QMouseEvent *event)
 	std::cout << "PRESS in texture "<< x << " / "<< y << std::endl;
 
 	if (m_state_modifier & Qt::ShiftModifier)
-		std::cout << "     with Shift" << std::endl;
+    {
+        std::cout << "     with Shift (new particle)" << std::endl;
+        m_fountain.generate(Vec2f(x,y));
+    }
 	if (m_state_modifier & Qt::ControlModifier)
 		std::cout << "     with Ctrl" << std::endl;
 
-    makeCurrent();
-	paintGL();
-
-	glPointSize(4.0f);
-	glColor3f(1.0f,0,0);
-	glBegin(GL_POINTS);
-
-	unsigned int nbp = 0;// VOTRE CODE ICI : nombre de particules
-	for (int i = 0; i < nbp; i++ )
-	{
-		// here get back position of each particle in ptPos
-//		glVertex2f(2.0f*ptPos[0]/m_widthTex-1.0f, -2.0f*ptPos[1]/m_heightTex+1.0f);
-	}
-	glEnd();
-
-	swapBuffers();
+    //makeCurrent();
+    updateGL();
 }
 
 
@@ -222,13 +234,13 @@ void RenderImg::clean()
 {
     unsigned char* ptr=m_ptrTex;
 
-	for (int i=0; i<m_heightTex; ++i)
-	{
-		for (int j=0; j<m_widthTex; ++j)
-		{
-			*ptr++ = 0;
-		}
-	}
+    for (int i=0; i<m_heightTex; ++i)
+    {
+        for (int j=0; j<m_widthTex; ++j)
+        {
+            *ptr++ = 0;
+        }
+    }
 }
 
 
@@ -236,48 +248,67 @@ void RenderImg::toggleSobel()
 {
 	m_drawSobel = !m_drawSobel;
 	if (m_drawSobel)
-	{
-		// VOTRE CODE ICI : compute Sobel on image
-
-		updateDataTexture();
-	}
+    {
+        GradientSobel GS;
+        m_gradImg=GS(m_img);
+        updateGL();
+    }
 }
 
-
+void RenderImg::toggleBBdraw()
+{
+    m_drawBB = !m_drawBB;
+    if (m_drawBB)
+    {
+        updateGL();
+    }
+}
 
 void RenderImg::drawSobel()
 {
-	glBegin(GL_LINES);
-	for (int j=0; j<m_heightTex; ++j)
-	{
-		for (int i=0; i<m_widthTex; ++i)
-		{
-			// get value of gradiant
-			// Vec2f v = ??
+    glBegin(GL_LINES);
+    for (int j=0; j<m_heightTex; ++j)
+    {
+        for (int i=0; i<m_widthTex; ++i)
+        {
+            Vec2f& v=m_gradImg.getPixel(i,j);
 
-//			if (v*v > 0.001f)
-//			{
-//				float x = -1.0f + (2.0f*i)/(m_widthTex-1);
-//				float y = 1.0f  - (2.0f*j)/(m_heightTex-1);// minus because of GL is bottom to up and image up to boytom
-//				v *= 4.0f/m_widthTex;
-//				glColor3f(1.0f,1.0f,0.0f);
-//				glVertex2f(x,y);
-//				glColor3f(1.0f,0.0f,0.0f);
-//				glVertex2f(x+v[0],y-v[1]);
-//			}
-		}
-	}
-	glEnd();
+            if (v*v > 0.001f)
+            {
+                float x = -1.0f + (2.0f*i)/(m_widthTex-1);
+                float y = 1.0f  - (2.0f*j)/(m_heightTex-1);// minus because of GL is bottom to up and image up to boytom
+                v *= 4.0f/m_widthTex;
+                glColor3f(1.0f,1.0f,0.0f);
+                glVertex2f(x,y);
+                glColor3f(1.0f,0.0f,0.0f);
+                glVertex2f(x+v[0],y-v[1]);
+            }
+        }
+    }
+    glEnd();
 }
 
 
-void RenderImg::drawBB(const BoundingBox& bb)
+void RenderImg::updateBB(const BoundingBox& bb)
 {
-	glBegin(GL_LINE_LOOP);
-	glColor3f(1.0f,0.5f,0.5f);
-    glVertex2f( xImg2GL(bb.X1()), yImg2GL(bb.Y1()) );
-    glVertex2f( xImg2GL(bb.X1()), yImg2GL(bb.Y2()) );
-    glVertex2f( xImg2GL(bb.X2()), yImg2GL(bb.Y2()) );
-    glVertex2f( xImg2GL(bb.X2()), yImg2GL(bb.Y1()) );
-	glEnd();
+    m_bb=bb;
+    updateGL();
+}
+
+void RenderImg::drawBB()
+{
+    glBegin(GL_LINE_LOOP);
+    glColor3f(1.0f,0.5f,0.5f);
+    glVertex2f( m_bb.X1(), m_bb.Y1() );
+    glVertex2f( m_bb.X1(), m_bb.Y2() );
+    glColor3f(0.1f,0.5f,0.5f);
+    glVertex2f( m_bb.X2(), m_bb.Y2() );
+    glVertex2f( m_bb.X2(), m_bb.Y1() );
+    glEnd();
+}
+
+void RenderImg::updateFountain()
+{
+    if(m_fountain.progress())
+        updateGL();
 }

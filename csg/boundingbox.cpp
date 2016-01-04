@@ -12,7 +12,7 @@ BoundingBox::BoundingBox(const BoundingBox &other) :
 {}
 
 BoundingBox::BoundingBox(float x1, float y1, float x2, float y2) :
-    m_xy1xy2(Vec2f(x1, y1), Vec2f(x2, y2))
+    m_xy1xy2(Vec2f(std::min(x1,x2), std::min(y1,y2)), Vec2f(std::max(x1, x2), std::max(y1, y2)))
 {}
 
 BoundingBox::BoundingBox(const std::pair<Vec2f, Vec2f>& xy1xy2) :
@@ -103,44 +103,9 @@ BoundingBox BoundingBox::operator+(const BoundingBox &other) const
 
 BoundingBox BoundingBox::operator-(const BoundingBox &other) const
 {
-    BoundingBox bd(*this);
-    bool tall=false, eTooBig=false;
-    if(other.Y1()<=Y1() && other.Y2()>=Y2())
-    {//La boite est plus haute que this
-        if(other.X2()>=X1() && other.X1()<=X1())
-        {//La boite intersecte la partie gauche de this
-            tall=true;
-            bd.setX1(other.X2());
-        }
-        if(other.X1()<=X2() && other.X2()>=X2())
-        {//La boite intersecte la partie droite de this
-            if(tall)
-            {//La boite intersecte la partie gauche de this, la partie droite et est plus haute
-                eTooBig=true;
-            }
-            else
-            {//La boite intersecte seulement la partie droite de this
-                bd.setX2(other.X1());
-            }
-        }
-    }
-    else if(other.X1()<=X1() && other.X2()>=X2())
-    {//La boite est plus large que this
-        if(other.Y2()>=Y1() && other.Y1()<=Y1())
-        {//La boite intersecte la partie basse de this
-            bd.setY1(other.Y2());
-        }
-        else if(other.Y1()<=Y2() && other.Y2()>=Y2())
-        {//La boite intersecte la partie haute de this
-            bd.setY2(other.Y1());
-        }
-    }
-    if(eTooBig)
-    {
-        bd.setXY1(Vec2f(0, 0));
-        bd.setXY2(Vec2f(0, 0));
-    }
-    return bd;
+    //La conception actuelle me permet de déterminer une différence des boites
+    //mais pas des figures.
+    return operator+(other);
 }
 
 BoundingBox BoundingBox::operator^(const BoundingBox &other) const
@@ -156,6 +121,12 @@ BoundingBox BoundingBox::operator^(const BoundingBox &other) const
     return bd;
 }
 
+BoundingBox& BoundingBox::operator=(const BoundingBox &other)
+{
+    m_xy1xy2.first=other.XY1();
+    m_xy1xy2.second=other.XY2();
+    return *this;
+}
 
 //----------------------------------------------------------------------------
 //Opérations//
@@ -166,26 +137,18 @@ bool BoundingBox::collides(const BoundingBox &other) const
             (std::abs(Y1() - other.Y1()) * 2 < std::abs(Y1()-Y2())+std::abs(other.Y1()-other.Y2())));
 }
 
-void BoundingBox::rotate(float rad)
+void BoundingBox::applyTransfo(const Matrix33f &matrix, const Vec2f& v1, const Vec2f& v2)
 {
-    return;//literally nothing
+    setXY1(matrix*v1);
+    setXY2(matrix*v2);
 }
 
-void BoundingBox::translate(float tx, float ty)
+Vec2f BoundingBox::XY1_img(size_t width, size_t height) const
 {
-    setX1(X1()+tx);
-    setX2(X2()+tx);
-    setY1(Y1()+ty);
-    setY2(Y2()+ty);
+    return Vec2f(((1.0f+X1())/2.0f)*width, ((1.0f-Y1())/2.0f)*height);
 }
 
-void BoundingBox::scale(float vx, float vy)
+Vec2f BoundingBox::XY2_img(size_t width, size_t height) const
 {
-    float widthD2=(std::abs(X1()-X2())*vx)/2;
-    float heightD2=(std::abs(Y1()-Y2())*vy)/2;
-    Vec2f center((X1()-X2())/2, (Y1()-Y2())/2);
-    setX1(center.X()-widthD2);
-    setX2(center.X()+widthD2);
-    setY1(center.Y()-heightD2);
-    setY2(center.Y()+heightD2);
+    return Vec2f(((1.0f+X2())/2.0f)*width, ((1.0f-Y2())/2.0f)*height);
 }

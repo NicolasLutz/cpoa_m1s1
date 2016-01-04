@@ -15,7 +15,8 @@ HEADERS += *.h *.hpp \
     vector.hpp \
     vec2f.h \
     vec3f.h \
-    matrix33f.h
+    matrix33f.h \
+    common.h
 
 DESTDIR = ../lib
 

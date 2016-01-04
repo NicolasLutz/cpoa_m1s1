@@ -2,6 +2,7 @@
 #define CSGOPERATION_H
 
 #include "csgnode.h"
+#include "common.h"
 
 typedef enum {CSG_NO_OPERATION, CSG_UNION, CSG_INTERSECTION, CSG_DIF} CsgOpType_t;
 
@@ -23,9 +24,17 @@ public:
     void setLeft(CsgNode *left);
     void setRight(CsgNode *right);
 
-    //Transformations//
+    //Opérations//
     bool intersects(const Vec2f &vertice) const;
     bool intersectsBBox(const Vec2f &vertice) const;
+    void updateBB();
+
+    CsgNode *clone() const;
+    void swap();
+
+    //Autre//
+    std::ostream& print(std::ostream &stream) const;
+    std::istream& scan(std::istream &stream);
 
 private:
      CsgOpType_t    m_type;

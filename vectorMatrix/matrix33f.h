@@ -41,6 +41,33 @@ public:
 
     void apply(Vec2f &vector) const;
 
+    //Accesseurs//
+
+    ///Permet de retracer les transformations effectuées (interface + bbox)
+    float Rad() const;
+    float Tx() const;
+    float Ty() const;
+    float Vx() const;
+    float Vy() const;
+
+    //Setters//
+
+    void forceRad(float rad);
+    void forceTx(float tx);
+    void forceTy(float ty);
+    void forceVx(float vx);
+    void forceVy(float vy);
+
+
+private:
+
+    void _resetId();
+
+    float m_tx;
+    float m_ty;
+    float m_rad;
+    float m_vx;
+    float m_vy;
 };
 
 #endif // MATRIX33F_H

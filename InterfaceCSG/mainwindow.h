@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QPlainTextEdit>
 #include <QKeyEvent>
+#include <QTimer>
 
 #include "renderImg.h"
 #include "csgtree.h"
@@ -11,8 +12,6 @@
 #include "csgdisk.h"
 #include "csgregularpolygon.h"
 #include "csgoperation.h"
-
-#include <map>
 
 namespace Ui {
 class MainWindow;
@@ -32,7 +31,7 @@ public:
 
 	void keyPressEvent(QKeyEvent* event) { m_pressed = char(event->key()+32); }
 
-	void keyReleaseEvent(QKeyEvent* event) { m_pressed = char(0); }
+    void keyReleaseEvent(QKeyEvent* event) { m_pressed = char(0); }
 
 	char pressed() const { return m_pressed; }
 };
@@ -46,6 +45,8 @@ class MainWindow : public QMainWindow
 private:
 	Ui::MainWindow *ui;
     RenderImg *m_render;
+    void _setIndics();
+    QTimer m_timer;
 
 protected:
 	/// current selected node
@@ -69,8 +70,6 @@ protected:
 	/// current transfo matrix for storing current primitive matrix
     Matrix33f m_transfo;
 
-    std::vector<Matrix33f> m_transfos;
-    std::vector<CsgPrimitive *> m_prims;
     Vec2f m_centerSelection;
 
 	/// just to avoid ping-pong signal
@@ -111,6 +110,10 @@ public slots:
 	void checkDrawCurrent();
 	void currentNodeChanged(int id);
 	void nodeTextSelected(bool);
+    void updateFountain();
+
+    //Ajoutés après//
+    void on_actionDraw_BB_triggered();
 };
 
 #endif // MAINWINDOW_H

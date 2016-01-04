@@ -3,7 +3,7 @@
 
 #include "vec2f.h"
 
-class Vec3f : public Vector<3, float>
+class Vec3f : public Vector<3u, float>
 {
 public:
 
@@ -21,6 +21,18 @@ public:
     float operator*(const Vec3f& other) const;
 
     Vec3f operator^(const Vec3f& other) const;
+
+    const Vec3f& operator*=(float fValue);
+    const Vec3f& operator*=(unsigned int uiValue);
+    const Vec3f& operator*=(int iValue);
+    const Vec3f& operator*=(double lfValue);
+    const Vec3f& operator*=(long int liValue);
+
+    Vec3f operator*(float fValue) const;
+    Vec3f operator*(unsigned int uiValue) const;
+    Vec3f operator*(int iValue) const;
+    Vec3f operator*(double lfValue) const;
+    Vec3f operator*(long int liValue) const;
 
     //Accesseurs
 

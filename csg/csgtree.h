@@ -21,9 +21,21 @@ public:
 
     //Opérations
 
-    void add(CsgPrimitive *primitive);
-    void join(CsgOperation *operation, CsgNode *node, CsgNode *otherNode);
+    CsgNode* add(CsgNode *node);
+    CsgNode* join(CsgOperation *operation, CsgNode *node, CsgNode *otherNode);
     CsgNode *fromId(int id);
+    void clear();
+    void removeId(int id);
+
+    //Itérateurs//
+    typedef std::map<int, CsgNode *>::iterator iterator;
+    typedef std::map<int, CsgNode *>::const_iterator const_iterator;
+
+    iterator begin();
+    iterator end();
+
+    const_iterator begin() const;
+    const_iterator end() const;
 
 private:
     std::set<CsgNode *, Func_CSGT_Compare>   m_roots;

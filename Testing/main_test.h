@@ -3,7 +3,6 @@
 
 #include "matrix33f.h"
 #include "image2grey.h"
-#include "etudiant.h"
 #include <vector>
 #include <algorithm>
 
@@ -14,8 +13,6 @@ void testArray();
 void testMatrix33f();
 
 void testImage2D();
-void prettyBadTestImage2Grey();
-
-void testEtudiantTp();
+void testImage2Grey();
 
 #endif // MAIN_TEST_H

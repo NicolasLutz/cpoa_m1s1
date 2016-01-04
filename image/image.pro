@@ -3,6 +3,7 @@ TARGET = image
 TEMPLATE = lib
 CONFIG += staticlib
 
+
 INCLUDEPATH += ../vectorMatrix
 
 SOURCES += *.cpp \
@@ -10,9 +11,8 @@ SOURCES += *.cpp \
 
 HEADERS += *.h *.hpp \
     imgGradient.h \
-    image2d.hpp \
     image2grey.h \
-    image2d_unknownsize.hpp
+    image2d.hpp
 
 DESTDIR = ../lib
 

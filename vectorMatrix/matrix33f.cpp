@@ -5,12 +5,14 @@
 //====================================================================================================================================
 //Constructeurs
 
-Matrix33f::Matrix33f() : Array<3, Vec3f>()
+Matrix33f::Matrix33f() :
+    Array<3, Vec3f>(), m_tx(0), m_ty(0), m_rad(0), m_vx(1), m_vy(1)
 {
-    setId();
+    _resetId();
 }
 
-Matrix33f::Matrix33f(transformation_t transformation, float arg1, float arg2) : Array<3, Vec3f>()
+Matrix33f::Matrix33f(transformation_t transformation, float arg1, float arg2) :
+    Array<3, Vec3f>(), m_tx(0), m_ty(0), m_rad(0), m_vx(1), m_vy(1)
 {
     switch(transformation)
     {
@@ -24,11 +26,12 @@ Matrix33f::Matrix33f(transformation_t transformation, float arg1, float arg2) : 
             setScaling(arg1, arg2);
             break;
         default:
-            setId();
+            _resetId();
     }
 }
 
-Matrix33f::Matrix33f(const Matrix33f &other) : Array<3, Vec3f>(other)
+Matrix33f::Matrix33f(const Matrix33f &other) :
+    Array<3, Vec3f>(other), m_tx(other.Tx()), m_ty(other.Ty()), m_rad(other.Rad()), m_vx(other.Vx()), m_vy(other.Vy())
 {}
 
 //====================================================================================================================================
@@ -48,9 +51,13 @@ Matrix33f Matrix33f::operator*(const Matrix33f& matrix) const
             }
         }
     }
+    result.forceTx(matrix.Tx());
+    result.forceTy(matrix.Ty());
+    result.forceRad(matrix.Rad());
+    result.forceVx(matrix.Vx());
+    result.forceVy(matrix.Vy());
     return result;
 }
-
 
 Vec3f Matrix33f::operator*(const Vec3f& vector) const
 {
@@ -99,17 +106,12 @@ Matrix33f Matrix33f::invert() const
 
 void Matrix33f::setId()
 {
-    m_tab[0][0]=1.0f;
-    m_tab[0][1]=0;
-    m_tab[0][2]=0;
-
-    m_tab[1][0]=0;
-    m_tab[1][1]=1.0f;
-    m_tab[1][2]=0;
-
-    m_tab[2][0]=0;
-    m_tab[2][1]=0;
-    m_tab[2][2]=1.0f;
+    _resetId();
+    m_tx=0;
+    m_ty=0;
+    m_rad=0;
+    m_vx=0;
+    m_vy=0;
 }
 
 //====================================================================================================================================
@@ -127,6 +129,9 @@ void Matrix33f::setTranslation(float tx, float ty)
     m_tab[2][0]=0;
     m_tab[2][1]=0;
     m_tab[2][2]=1.0f;
+
+    m_tx=tx;
+    m_ty=ty;
 }
 
 //====================================================================================================================================
@@ -146,6 +151,8 @@ void Matrix33f::setRotation(float rad)
     m_tab[2][0]=0;
     m_tab[2][1]=0;
     m_tab[2][2]=1.0f;
+
+    m_rad=rad;
 }
 
 //====================================================================================================================================
@@ -163,6 +170,9 @@ void Matrix33f::setScaling(float vx, float vy)
     m_tab[2][0]=0;
     m_tab[2][1]=0;
     m_tab[2][2]=1.0f;
+
+    m_vx=vx;
+    m_vy=vy;
 }
 
 //====================================================================================================================================
@@ -172,14 +182,19 @@ void Matrix33f::addTranslation(float tx, float ty)
 {
     Matrix33f m(TRANSLATION_T, tx, ty);
     *this=m*(*this);
+
+    m_tx=tx;
+    m_ty=ty;
 }
 
 //====================================================================================================================================
 
 void Matrix33f::addRotation(float rad)
 {
-    Matrix33f m(ROTATION_T, rad, 0);
-    *this=m*(*this);
+    Matrix33f mRotate(ROTATION_T, rad, 0);
+    *this=mRotate*(*this);
+
+    m_rad=rad;
 }
 
 //====================================================================================================================================
@@ -199,6 +214,9 @@ void Matrix33f::addScaling(float vx, float vy)
     */
     Matrix33f m(SCALING_T, vx, vy);
     *this=m*(*this);
+
+    m_vx=vx;
+    m_vy=vy;
 }
 
 //====================================================================================================================================
@@ -209,4 +227,78 @@ void Matrix33f::apply(Vec2f &vector) const
     vec3=(*this)*vec3;
     vector.setX(vec3.X());
     vector.setY(vec3.Y());
+}
+
+//====================================================================================================================================
+//Accesseurs//
+
+float Matrix33f::Rad() const
+{
+    return m_rad;
+}
+
+float Matrix33f::Tx() const
+{
+    return m_tx;
+}
+
+float Matrix33f::Ty() const
+{
+    return m_ty;
+}
+
+float Matrix33f::Vx() const
+{
+    return m_vx;
+}
+
+float Matrix33f::Vy() const
+{
+    return m_vy;
+}
+
+//====================================================================================================================================
+//Setters//
+
+void Matrix33f::forceRad(float rad)
+{
+    m_rad=rad;
+}
+
+void Matrix33f::forceTx(float tx)
+{
+    m_tx=tx;
+}
+
+void Matrix33f::forceTy(float ty)
+{
+    m_ty=ty;
+}
+
+void Matrix33f::forceVx(float vx)
+{
+    m_vx=vx;
+}
+
+void Matrix33f::forceVy(float vy)
+{
+    m_vy=vy;
+}
+
+//====================================================================================================================================
+//Private//
+
+void Matrix33f::_resetId()
+{
+    m_tab[0][0]=1.0f;
+    m_tab[0][1]=0;
+    m_tab[0][2]=0;
+
+    m_tab[1][0]=0;
+    m_tab[1][1]=1.0f;
+    m_tab[1][2]=0;
+
+    m_tab[2][0]=0;
+    m_tab[2][1]=0;
+    m_tab[2][2]=1.0f;
 }

@@ -4,8 +4,6 @@
 #include <stdexcept>
 #include <iostream>
 
-//#define _e_ 0.01 //floating point authorized error for null check
-
 template<size_t size, typename T> class Array
 {
 public:
@@ -18,10 +16,12 @@ public:
 
     //Opérateurs//
 
-    Array& operator=(const Array<size,T> &other);
+    Array<size, T>& operator=(const Array<size,T> &other);
     T& operator[](unsigned int i);
     const T& operator[](unsigned int i) const;
+
     bool operator==(const Array<size,T> &other) const;
+    bool operator!=(const Array<size,T> &other) const;
 
     //Accesseurs//
 
@@ -59,7 +59,7 @@ public:
         value_type* m_ptr;
     };
 
-    class const_iterator //credits for iterator example goes to https://gist.github.com/jeetsukumaran/307264
+    class const_iterator
     {
     public:
         typedef const_iterator self_type;
@@ -93,17 +93,20 @@ public:
     const_iterator end() const;
     const_iterator last() const;
 
-protected:
+    //Autres//
+    template<size_t ssize, typename sT>
+    friend std::ostream& operator<< (std::ostream &stream, const Array<ssize,sT> &object);
 
+    template<size_t ssize, typename sT>
+    friend std::istream& operator>> (std::istream &stream, Array<ssize,sT> &object);
+
+protected:
     T m_tab[size];
 };
 
-template<size_t size, typename T>
-std::ostream& operator<< (std::ostream &stream, const Array<size,T> &array);
 
 //------------------------------------------------
 //------------------------------------------------
-
 //====================================================================================================================================
 //Constructeurs//
 
@@ -180,6 +183,12 @@ bool Array<size,T>::operator==(const Array<size,T> &other) const
     return ret;
 }
 
+template<size_t size, typename T>
+bool Array<size,T>::operator!=(const Array<size,T> &other) const
+{
+    return !operator==(other);
+}
+
 //====================================================================================================================================
 //Accesseurs//
 
@@ -250,11 +259,11 @@ typename Array<size,T>::const_iterator Array<size,T>::last() const
 //Autres//
 
 template<size_t size, typename T>
-std::ostream& operator << (std::ostream &stream, const Array<size,T> &array)
+std::ostream& operator<< (std::ostream &stream, const Array<size,T> &object)
 {
     stream << '[';
     typename Array<size,T>::const_iterator cit;
-    for(cit=array.begin(); cit!=array.last(); ++cit)
+    for(cit=object.begin(); cit!=object.last(); ++cit)
     {
         stream << *cit << ", ";
     }
@@ -262,5 +271,15 @@ std::ostream& operator << (std::ostream &stream, const Array<size,T> &array)
     return stream;
 }
 
+template<size_t size, typename T>
+std::istream& operator>> (std::istream &stream, Array<size,T> &object)
+{
+    typename Array<size,T>::iterator it;
+    for(it=object.begin(); it!=object.end(); ++it)
+    {
+        stream >> *it;
+    }
+    return stream;
+}
 
 #endif // ARRAY_H

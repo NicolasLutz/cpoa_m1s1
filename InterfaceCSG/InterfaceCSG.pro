@@ -19,7 +19,7 @@ LIBS +=  -L ../lib \
         -lcsg   \
         -limage \
         -lvectorMatrix \
-#       -lparticle 
+        -lparticle
 
 PRE_TARGETDEPS = ../lib/*
 

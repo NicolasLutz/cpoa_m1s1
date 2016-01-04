@@ -30,8 +30,6 @@ float Vec3f::operator*(const Vec3f& other) const
     return X()*other.X()+Y()*other.Y()+Z()*other.Z();
 }
 
-//====================================================================================================================================
-
 Vec3f Vec3f::operator^(const Vec3f& other) const
 {
     Vec3f res(  Y()*other.Z()-Z()*other.Y()
@@ -41,6 +39,92 @@ Vec3f Vec3f::operator^(const Vec3f& other) const
 }
 
 //====================================================================================================================================
+
+const Vec3f& Vec3f::operator*=(float fValue)
+{
+    setX(X()*fValue);
+    setY(Y()*fValue);
+    setZ(Z()*fValue);
+    return (*this);
+}
+
+const Vec3f& Vec3f::operator*=(unsigned int uiValue)
+{
+    setX(X()*uiValue);
+    setY(Y()*uiValue);
+    setZ(Z()*uiValue);
+    return (*this);
+}
+
+const Vec3f& Vec3f::operator*=(int iValue)
+{
+    setX(X()*iValue);
+    setY(Y()*iValue);
+    setZ(Z()*iValue);
+    return (*this);
+}
+
+const Vec3f& Vec3f::operator*=(double lfValue)
+{
+    setX(X()*lfValue);
+    setY(Y()*lfValue);
+    setZ(Z()*lfValue);
+    return (*this);
+}
+
+const Vec3f& Vec3f::operator*=(long int liValue)
+{
+    setX(X()*liValue);
+    setY(Y()*liValue);
+    setZ(Z()*liValue);
+    return (*this);
+}
+
+Vec3f Vec3f::operator*(float fValue) const
+{
+    Vec3f v;
+    v.setX(X()*fValue);
+    v.setY(Y()*fValue);
+    v.setZ(Z()*fValue);
+    return v;
+}
+
+Vec3f Vec3f::operator*(unsigned int uiValue) const
+{
+    Vec3f v;
+    v.setX(X()*uiValue);
+    v.setY(Y()*uiValue);
+    v.setZ(Z()*uiValue);
+    return v;
+}
+
+Vec3f Vec3f::operator*(int iValue) const
+{
+    Vec3f v;
+    v.setX(X()*iValue);
+    v.setY(Y()*iValue);
+    v.setZ(Z()*iValue);
+    return v;
+}
+
+Vec3f Vec3f::operator*(double lfValue) const
+{
+    Vec3f v;
+    v.setX(X()*lfValue);
+    v.setY(Y()*lfValue);
+    v.setZ(Z()*lfValue);
+    return v;
+}
+
+Vec3f Vec3f::operator*(long int liValue) const
+{
+    Vec3f v;
+    v.setX(X()*liValue);
+    v.setY(Y()*liValue);
+    v.setZ(Z()*liValue);
+    return v;
+}
+
 //Accesseurs
 
 const float& Vec3f::X() const

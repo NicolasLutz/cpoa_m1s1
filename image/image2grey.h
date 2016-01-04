@@ -23,8 +23,6 @@ public:
     void load(const std::string &filename);
 
     void save(const std::string &filename) const;
-
-    void clear();
 };
 
 #endif // IMAGE2GREY_H

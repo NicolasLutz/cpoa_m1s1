@@ -249,10 +249,11 @@ void RenderImg::toggleSobel()
 	m_drawSobel = !m_drawSobel;
 	if (m_drawSobel)
     {
-        GradientSobel GS;
-        m_gradImg=GS(m_img);
+        m_gradImg=m_GS(m_img, GRAD_55); //more precise
         updateGL();
     }
+    else
+        m_gradImg.clear();
 }
 
 void RenderImg::toggleBBdraw()
@@ -309,6 +310,6 @@ void RenderImg::drawBB()
 
 void RenderImg::updateFountain()
 {
-    if(m_fountain.progress())
+    if(m_fountain.progress(m_img, m_gradImg))
         updateGL();
 }

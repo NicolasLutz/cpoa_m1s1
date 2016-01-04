@@ -1,7 +1,9 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
 
-#include "vec2f.h"
+#include "matrix33f.h"
+#include "image2grey.h"
+#include "imgGradient.h"
 #include <ctime>
 
 class Particle
@@ -12,7 +14,7 @@ public:
     Particle(const Vec2f& start, const Vec2f& velocity=Vec2f(0,0));
 
     int update();
-    void validate();
+    void validate(const Image2Grey& img_in, const Image2<Vec2f> &img_grad);
 
     //Accesseurs//
 
@@ -21,7 +23,13 @@ public:
     int getDate() const;
     int getPriority() const;
 
+    //Setters//
+
+    static void addAbsoluteTime();
+
 private:
+
+    void _giveCollisionPoint(const Image2Grey& img_in, int &x, int &y);
 
     Vec2f m_start;
 
@@ -37,6 +45,8 @@ private:
 
     static Vec2f s_gravity;
     static int s_absoluteTime;
+    static Matrix33f s_toTan;
+    static Matrix33f s_toCounterTan;
 };
 
 #endif // PARTICLE_H

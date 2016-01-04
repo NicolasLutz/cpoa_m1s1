@@ -13,7 +13,7 @@ public:
     //Constructeurs
 
     Matrix33f();
-    Matrix33f(transformation_t transformation, float arg1, float arg2);
+    Matrix33f(transformation_t transformation, float arg1, float arg2=0);
     Matrix33f(const Matrix33f &other);
 
     //Opérateurs

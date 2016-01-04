@@ -42,6 +42,7 @@ public:
 
     //Opérations//
 
+    void clear();
 
     //Itérateurs//
 
@@ -222,6 +223,18 @@ T* Image2<T>::getArray() const
     return m_tab;
 }
 
+//====================================================================================================================================
+//Itérateurs//
+
+template<typename T>
+void Image2<T>::clear()
+{
+    iterator_bbox end=this->end();
+    for(iterator_bbox it=begin();it!=end;++it)
+    {
+        *it=T(0);
+    }
+}
 
 //====================================================================================================================================
 //Itérateurs//

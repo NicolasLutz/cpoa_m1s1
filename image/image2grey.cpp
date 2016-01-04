@@ -65,12 +65,3 @@ void Image2Grey::save(const std::string &filename) const
     }
     return;
 }
-
-void Image2Grey::clear()
-{
-    Image2Grey::iterator_bbox end=this->end();
-    for(Image2Grey::iterator_bbox it=begin();it!=end;++it)
-    {
-        *it=0;
-    }
-}

@@ -19,6 +19,9 @@ public:
     CsgNode *Left() const;
     CsgNode *Right() const;
 
+    int getSpecialLeft() const;
+    int getSpecialRight() const;
+
     //Setters//
     void setType(CsgOpType_t type);
     void setLeft(CsgNode *left);
@@ -40,6 +43,8 @@ private:
      CsgOpType_t    m_type;
      CsgNode        *m_left;
      CsgNode        *m_right;
+     int m_special_left;
+     int m_special_right;
 };
 
 #endif // CSGOPERATION_H

@@ -402,7 +402,6 @@ void MainWindow::loadCSG()
                     in >> *prNode;
                     break;
                 default:
-                    std::cerr << "Unknown csg node identifier found: " << id << std::endl;
                     break;
             }
             if(prNode!=NULL)
@@ -411,7 +410,7 @@ void MainWindow::loadCSG()
             }
             else if(opNode!=NULL)
             {
-                m_tree.join(opNode, m_tree.fromId((int)opNode->Left()), m_tree.fromId((int)opNode->Right()));
+                m_tree.join(opNode, m_tree.fromId(opNode->getSpecialLeft()), m_tree.fromId(opNode->getSpecialRight()));
             }
         }
         in.close();
@@ -469,11 +468,11 @@ void MainWindow::appendCSG()
             }
             if(prNode!=NULL)
             {
-                m_tree.add(prNode);
+                m_currentNode=m_tree.add(prNode);
             }
             else if(opNode!=NULL)
             {
-                m_tree.join(opNode, m_tree.fromId(counter+(int)opNode->Left()), m_tree.fromId(counter+(int)opNode->Right()));
+                m_currentNode=m_tree.join(opNode, m_tree.fromId(counter+opNode->getSpecialLeft()), m_tree.fromId(counter+opNode->getSpecialRight()));
             }
         }
         in.close();

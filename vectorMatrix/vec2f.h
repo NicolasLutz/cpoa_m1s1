@@ -10,7 +10,7 @@ public:
     //Constructeurs
     Vec2f();
 
-    Vec2f(float x, float y);
+    Vec2f(float x, float y=0);
 
     Vec2f(const Vec2f& other);
 

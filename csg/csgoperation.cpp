@@ -12,7 +12,9 @@ CsgOperation::CsgOperation(CsgOpType_t type, const std::string &label, CsgNode *
 
 CsgOperation::CsgOperation(const CsgOperation &other) :
     CsgNode(other), m_type(other.Type()), m_left(other.Left()), m_right(other.Right())
-{}
+{
+    updateBB();
+}
 
 //----------------------------------------------------------------------------
 
@@ -35,6 +37,16 @@ CsgNode *CsgOperation::Left() const
 CsgNode *CsgOperation::Right() const
 {
     return m_right;
+}
+
+int CsgOperation::getSpecialLeft() const
+{
+    return m_special_left;
+}
+
+int CsgOperation::getSpecialRight() const
+{
+    return m_special_right;
 }
 
 //----------------------------------------------------------------------------
@@ -72,7 +84,7 @@ void CsgOperation::setRight(CsgNode *right)
 bool CsgOperation::intersects(const Vec2f &vertice) const
 {
     bool itDoes=false;
-    if(intersectsBBox(vertice))
+    if(intersectsBBox(vertice) && Left()!=NULL && Right()!=NULL)
     {
         switch(this->Type())
         {
@@ -151,7 +163,7 @@ std::istream& CsgOperation::scan(std::istream &stream)
     int op, l, r;
     stream >> op >> l >> r;
     setType((CsgOpType_t)op);
-    setLeft((CsgNode *)l);
-    setRight((CsgNode *)r);
+    m_special_left=l;
+    m_special_right=r;
     return stream;
 }

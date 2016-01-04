@@ -15,9 +15,8 @@ public:
     virtual ~ParticleSystem();
 
     const Particle* generate(const Vec2f& start);
-    bool progressOnce();
-    bool progress(int n); ///< progresses n times
-    bool progress();
+    bool progressOnce(const Image2Grey& img_in, const Image2<Vec2f>& img_grad);
+    bool progress(const Image2Grey& img_in, const Image2<Vec2f>& img_grad);
 
     //Itérateurs//
 

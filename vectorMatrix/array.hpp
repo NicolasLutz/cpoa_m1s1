@@ -87,11 +87,9 @@ public:
 
     iterator begin();
     iterator end();
-    iterator last(); ///< returns the pointer of the last value from the array
 
     const_iterator begin() const;
     const_iterator end() const;
-    const_iterator last() const;
 
     //Autres//
     template<size_t ssize, typename sT>
@@ -228,13 +226,6 @@ typename Array<size,T>::iterator Array<size,T>::end()
     return iterator(m_tab + size);
 }
 
-template<size_t size, typename T>
-typename Array<size,T>::iterator Array<size,T>::last()
-{
-    return iterator(m_tab + (size-1));
-}
-
-
 //====================================================================================================================================
 
 template<size_t size, typename T>
@@ -249,25 +240,17 @@ typename Array<size,T>::const_iterator Array<size,T>::end() const
     return const_iterator(m_tab + size);
 }
 
-template<size_t size, typename T>
-typename Array<size,T>::const_iterator Array<size,T>::last() const
-{
-    return const_iterator(m_tab + (size-1));
-}
-
 //====================================================================================================================================
 //Autres//
 
 template<size_t size, typename T>
 std::ostream& operator<< (std::ostream &stream, const Array<size,T> &object)
 {
-    stream << '[';
     typename Array<size,T>::const_iterator cit;
-    for(cit=object.begin(); cit!=object.last(); ++cit)
+    for(cit=object.begin(); cit!=object.end(); ++cit)
     {
-        stream << *cit << ", ";
+        stream << *cit << ' ';
     }
-    stream << *cit << ']';
     return stream;
 }
 

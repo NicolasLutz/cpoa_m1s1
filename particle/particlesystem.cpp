@@ -30,54 +30,30 @@ const Particle* ParticleSystem::generate(const Vec2f& start)
     return p;
 }
 
-bool ParticleSystem::progressOnce()
+bool ParticleSystem::progressOnce(const Image2Grey &img_in, const Image2<Vec2f> &img_grad)
 {
     if(!m_pq.empty()) //updates once per frame (this is really bad :( )
     {
         Particle *top=m_pq.top();
         m_pq.pop();
         top->update();
-        //top->validate();
+        top->validate(img_in, img_grad);
         const Vec2f& pos=top->getPosition();
-        if(top->getDate()<1000 && pos.Y()<=m_height && pos.X()<=m_width)
+        if(top->getDate()<100 && pos.Y()<=m_height && pos.X()<=m_width)
             m_pq.push(top);
         else
         {
             m_set.erase(top);
             delete top;
         }
+        Particle::addAbsoluteTime();
     }
     else
         return false;
     return true;
 }
 
-bool ParticleSystem::progress(int n)
-{
-    if(!m_pq.empty())
-    {
-        while(!m_pq.empty() && n>0) //update given loops (this is still bad :( )
-        {
-            Particle *top=m_pq.top();
-            m_pq.pop();
-            n-=top->update();
-            //top->validate();
-            const Vec2f& pos=top->getPosition();
-            if(top->getDate()<1000 && pos.Y()<=m_height && pos.X()<=m_width)
-                m_pq.push(top);
-            else
-            {
-                m_set.erase(top);
-                delete top;
-            }
-        }
-    }
-    else
-        return false;
-    return true;
-}
-
-bool ParticleSystem::progress()
+bool ParticleSystem::progress(const Image2Grey &img_in, const Image2<Vec2f> &img_grad)
 {
     if(!m_pq.empty())
     {
@@ -87,15 +63,16 @@ bool ParticleSystem::progress()
             Particle *top=m_pq.top();
             m_pq.pop();
             top->update();
-            //top->validate();
+            top->validate(img_in, img_grad);
             const Vec2f& pos=top->getPosition();
-            if(top->getDate()<1000 && pos.Y()<=m_height && pos.X()<=m_width)
+            if(top->getDate()<100 && pos.Y()<=m_height && pos.X()<=m_width)
                 m_pq.push(top);
             else
             {
                 m_set.erase(top);
                 delete top;
             }
+            Particle::addAbsoluteTime();
         }
     }
     else

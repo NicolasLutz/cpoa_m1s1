@@ -46,7 +46,6 @@ private:
 	Ui::MainWindow *ui;
     RenderImg *m_render;
     void _setIndics();
-    QTimer m_timer;
 
 protected:
 	/// current selected node
@@ -75,6 +74,7 @@ protected:
 	/// just to avoid ping-pong signal
 	bool m_stopSignal;
 
+    QTimer m_timer;
 
 	void updateTextGraph();
 

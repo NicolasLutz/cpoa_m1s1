@@ -16,12 +16,14 @@ RenderImg::RenderImg( QWidget *parent ):
 	m_drawSobel(false),
     m_drawBB(false),
     m_img(m_widthTex, m_heightTex),
+    m_gradImg(m_widthTex, m_heightTex),
     m_GS(),
     m_fountain(m_widthTex, m_heightTex)
   // QQ INIT A AJOUTER ?
 {
 	// VOTRE CODE ICI
     m_img.clear();
+    m_gradImg.clear();
     m_ptrTex=m_img.getArray();
 }
 

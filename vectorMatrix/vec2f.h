@@ -14,6 +14,8 @@ public:
 
     Vec2f(const Vec2f& other);
 
+    virtual ~Vec2f();
+
     //Opérateurs
 
     float operator*(const Vec2f& other) const;

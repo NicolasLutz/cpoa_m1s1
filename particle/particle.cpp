@@ -48,7 +48,7 @@ void Particle::validate(const Image2Grey& img_in, const Image2<Vec2f> &img_grad)
             Vec2f& directionPixel=img_grad.getPixel(x, y);
             if(directionPixel.X()!=0 && directionPixel.Y()!=0)
             {
-                Vec2f tan=(directionPixel.X()<(int)(img_in.getWidth()/2) ? s_toTan*directionPixel : s_toCounterTan*directionPixel);
+                Vec2f tan=(directionPixel.X()<0 ? s_toTan*directionPixel : s_toCounterTan*directionPixel);
                 directionPixel.normalize();
                 tan.normalize();
                 m_f_velocity=directionPixel*-0.5 + tan*0.9;
@@ -98,19 +98,18 @@ void Particle::addAbsoluteTime()
 void Particle::_giveCollisionPoint(const Image2Grey& img_in, int &x, int &y)
 {
     int n=0;
-    float steps=10.0f;
+    float steps=-m_f_velocity.Y();
     Vec2f acceleration=s_gravity;
-    acceleration/=10.0f;
+    acceleration/=steps;
     while(img_in.getPixel(x, y)==0)
     {
-        Vec2f position=m_c_position;
         Vec2f velocity=m_c_velocity;
         velocity/=steps;
-        m_f_position=position+velocity+acceleration;
+        m_f_position=m_c_position+velocity+acceleration;
         m_f_velocity=velocity+acceleration;
         x=m_f_position.X();
         y=m_f_position.Y();
-        if(++n==10)
+        if(++n==(int)steps)
         {
             m_c_date++;
             n=0;

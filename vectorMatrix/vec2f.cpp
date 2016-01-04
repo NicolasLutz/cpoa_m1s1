@@ -14,6 +14,11 @@ Vec2f::Vec2f(float x, float y) : Vector<2, float>()
 Vec2f::Vec2f(const Vec2f& other) : Vector<2, float>(other)
 {}
 
+Vec2f::~Vec2f()
+{
+
+}
+
 //====================================================================================================================================
 //Opérateurs
 

@@ -14,11 +14,11 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_QML_DEBUG -DQT_DECLARATIVE_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -m64 -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
-CXXFLAGS      = -m64 -pipe -Wall -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
+CXXFLAGS      = -m64 -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 INCPATH       = -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I. -I../vectorMatrix -I../image -I../csg -I../particle -I.. -I/usr/include/qt5 -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I.
 LINK          = g++
 LFLAGS        = -m64
-LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -L ../lib -limage -lvectorMatrix -lQt5Gui -L/usr/lib/x86_64-linux-gnu -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -L ../lib -lcsg -limage -lvectorMatrix -lQt5Gui -L/usr/lib/x86_64-linux-gnu -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
@@ -45,10 +45,8 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = main_test.cpp \
-		etudiant.cpp 
-OBJECTS       = main_test.o \
-		etudiant.o
+SOURCES       = main_test.cpp 
+OBJECTS       = main_test.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -276,7 +274,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/testing1.0.0 || mkdir -p .tmp/testing1.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/testing1.0.0/ && $(COPY_FILE) --parents main_test.h etudiant.h .tmp/testing1.0.0/ && $(COPY_FILE) --parents main_test.cpp etudiant.cpp .tmp/testing1.0.0/ && (cd `dirname .tmp/testing1.0.0` && $(TAR) testing1.0.0.tar testing1.0.0 && $(COMPRESS) testing1.0.0.tar) && $(MOVE) `dirname .tmp/testing1.0.0`/testing1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/testing1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/testing1.0.0/ && $(COPY_FILE) --parents main_test.h .tmp/testing1.0.0/ && $(COPY_FILE) --parents main_test.cpp .tmp/testing1.0.0/ && (cd `dirname .tmp/testing1.0.0` && $(TAR) testing1.0.0.tar testing1.0.0 && $(COMPRESS) testing1.0.0.tar) && $(MOVE) `dirname .tmp/testing1.0.0`/testing1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/testing1.0.0
 
 
 clean:compiler_clean 
@@ -321,11 +319,8 @@ main_test.o: main_test.cpp main_test.h \
 		../vectorMatrix/array.hpp \
 		../image/image2grey.h \
 		../image/image2d.hpp \
-		etudiant.h
+		../vectorMatrix/common.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_test.o main_test.cpp
-
-etudiant.o: etudiant.cpp etudiant.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o etudiant.o etudiant.cpp
 
 ####### Install
 

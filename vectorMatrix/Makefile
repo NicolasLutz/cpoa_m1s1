@@ -286,7 +286,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/vectorMatrix1.0.0 || mkdir -p .tmp/vectorMatrix1.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/vectorMatrix1.0.0/ && $(COPY_FILE) --parents matrix33f.h vec2f.h vec3f.h array.hpp vector.hpp array.hpp vector.hpp vec2f.h vec3f.h matrix33f.h .tmp/vectorMatrix1.0.0/ && $(COPY_FILE) --parents matrix33f.cpp vec2f.cpp vec3f.cpp vec2f.cpp vec3f.cpp matrix33f.cpp .tmp/vectorMatrix1.0.0/ && (cd `dirname .tmp/vectorMatrix1.0.0` && $(TAR) vectorMatrix1.0.0.tar vectorMatrix1.0.0 && $(COMPRESS) vectorMatrix1.0.0.tar) && $(MOVE) `dirname .tmp/vectorMatrix1.0.0`/vectorMatrix1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/vectorMatrix1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/vectorMatrix1.0.0/ && $(COPY_FILE) --parents common.h matrix33f.h vec2f.h vec3f.h array.hpp vector.hpp array.hpp vector.hpp vec2f.h vec3f.h matrix33f.h common.h .tmp/vectorMatrix1.0.0/ && $(COPY_FILE) --parents matrix33f.cpp vec2f.cpp vec3f.cpp vec2f.cpp vec3f.cpp matrix33f.cpp .tmp/vectorMatrix1.0.0/ && (cd `dirname .tmp/vectorMatrix1.0.0` && $(TAR) vectorMatrix1.0.0.tar vectorMatrix1.0.0 && $(COMPRESS) vectorMatrix1.0.0.tar) && $(MOVE) `dirname .tmp/vectorMatrix1.0.0`/vectorMatrix1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/vectorMatrix1.0.0
 
 
 clean:compiler_clean 

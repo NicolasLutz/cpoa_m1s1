@@ -79,6 +79,7 @@ void CsgTree::clear()
         delete (*it).second;
     }
     m_nodes.erase(m_nodes.begin(), m_nodes.end());
+    CsgNode::resetCounter();
 }
 
 //----------------------------------------------------------------------------

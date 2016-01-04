@@ -162,7 +162,7 @@ Image2<T>::Image2(size_t width, size_t height) :
 template<typename T>
 Image2<T>::~Image2()
 {
-    delete m_tab;
+    //delete m_tab;
 }
 
 //====================================================================================================================================
@@ -172,7 +172,7 @@ template<typename T>
 Image2<T>& Image2<T>::operator=(const Image2<T> &other)
 {
     //TODO : gestion des pointeurs avec operator= ?
-    m_tab=other.getArray();
+    memcpy(m_tab,other.getArray(),m_width*m_height*sizeof(T));
     m_width=other.getWidth();
     m_height=other.getHeight();
     return (*this);
@@ -184,8 +184,6 @@ Image2<T>& Image2<T>::operator=(const Image2<T> &other)
 template<typename T>
 T& Image2<T>::getPixel(unsigned int i, unsigned int j) const
 {
-    if(i>=m_width || j>=m_height)
-        throw std::out_of_range("argument out of bounds");
     return m_tab[j*m_width+i];
 }
 
@@ -194,8 +192,6 @@ T& Image2<T>::getPixel(unsigned int i, unsigned int j) const
 template<typename T>
 void Image2<T>::setPixel(const T& pixel, unsigned int i, unsigned int j)
 {
-    if(i>=m_width || j>=m_height)
-        throw std::out_of_range("argument out of bounds");
     m_tab[j*m_width+i]=pixel;
 }
 

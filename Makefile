@@ -27,6 +27,7 @@ SUBTARGETS    =  \
 		sub-vectorMatrix \
 		sub-image \
 		sub-csg \
+		sub-particle \
 		sub-Testing \
 		sub-InterfaceCSG
 
@@ -160,44 +161,87 @@ sub-csg-uninstall_subtargets-ordered: sub-image-uninstall_subtargets-ordered  FO
 sub-csg-uninstall_subtargets: FORCE
 	@test -d csg/ || mkdir -p csg/
 	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
-sub-Testing-qmake_all: sub-csg-qmake_all FORCE
+sub-particle-qmake_all: sub-csg-qmake_all FORCE
+	@test -d particle/ || mkdir -p particle/
+	cd particle/ && $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/particle/particle.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile
+	cd particle/ && $(MAKE) -f Makefile qmake_all
+sub-particle: FORCE
+	@test -d particle/ || mkdir -p particle/
+	cd particle/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/particle/particle.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile
+sub-particle-make_first-ordered: sub-csg-make_first-ordered  FORCE
+	@test -d particle/ || mkdir -p particle/
+	cd particle/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/particle/particle.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
+sub-particle-make_first: FORCE
+	@test -d particle/ || mkdir -p particle/
+	cd particle/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/particle/particle.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
+sub-particle-all-ordered: sub-csg-all-ordered  FORCE
+	@test -d particle/ || mkdir -p particle/
+	cd particle/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/particle/particle.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
+sub-particle-all: FORCE
+	@test -d particle/ || mkdir -p particle/
+	cd particle/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/particle/particle.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
+sub-particle-clean-ordered: sub-csg-clean-ordered  FORCE
+	@test -d particle/ || mkdir -p particle/
+	cd particle/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/particle/particle.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
+sub-particle-clean: FORCE
+	@test -d particle/ || mkdir -p particle/
+	cd particle/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/particle/particle.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
+sub-particle-distclean-ordered: sub-csg-distclean-ordered  FORCE
+	@test -d particle/ || mkdir -p particle/
+	cd particle/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/particle/particle.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
+sub-particle-distclean: FORCE
+	@test -d particle/ || mkdir -p particle/
+	cd particle/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/particle/particle.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
+sub-particle-install_subtargets-ordered: sub-csg-install_subtargets-ordered  FORCE
+	@test -d particle/ || mkdir -p particle/
+	cd particle/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/particle/particle.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
+sub-particle-install_subtargets: FORCE
+	@test -d particle/ || mkdir -p particle/
+	cd particle/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/particle/particle.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
+sub-particle-uninstall_subtargets-ordered: sub-csg-uninstall_subtargets-ordered  FORCE
+	@test -d particle/ || mkdir -p particle/
+	cd particle/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/particle/particle.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
+sub-particle-uninstall_subtargets: FORCE
+	@test -d particle/ || mkdir -p particle/
+	cd particle/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/particle/particle.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
+sub-Testing-qmake_all: sub-particle-qmake_all FORCE
 	@test -d Testing/ || mkdir -p Testing/
 	cd Testing/ && $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile
 	cd Testing/ && $(MAKE) -f Makefile qmake_all
 sub-Testing: FORCE
 	@test -d Testing/ || mkdir -p Testing/
 	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile
-sub-Testing-make_first-ordered: sub-csg-make_first-ordered  FORCE
+sub-Testing-make_first-ordered: sub-particle-make_first-ordered  FORCE
 	@test -d Testing/ || mkdir -p Testing/
 	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
 sub-Testing-make_first: FORCE
 	@test -d Testing/ || mkdir -p Testing/
 	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
-sub-Testing-all-ordered: sub-csg-all-ordered  FORCE
+sub-Testing-all-ordered: sub-particle-all-ordered  FORCE
 	@test -d Testing/ || mkdir -p Testing/
 	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
 sub-Testing-all: FORCE
 	@test -d Testing/ || mkdir -p Testing/
 	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
-sub-Testing-clean-ordered: sub-csg-clean-ordered  FORCE
+sub-Testing-clean-ordered: sub-particle-clean-ordered  FORCE
 	@test -d Testing/ || mkdir -p Testing/
 	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
 sub-Testing-clean: FORCE
 	@test -d Testing/ || mkdir -p Testing/
 	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
-sub-Testing-distclean-ordered: sub-csg-distclean-ordered  FORCE
+sub-Testing-distclean-ordered: sub-particle-distclean-ordered  FORCE
 	@test -d Testing/ || mkdir -p Testing/
 	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
 sub-Testing-distclean: FORCE
 	@test -d Testing/ || mkdir -p Testing/
 	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
-sub-Testing-install_subtargets-ordered: sub-csg-install_subtargets-ordered  FORCE
+sub-Testing-install_subtargets-ordered: sub-particle-install_subtargets-ordered  FORCE
 	@test -d Testing/ || mkdir -p Testing/
 	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
 sub-Testing-install_subtargets: FORCE
 	@test -d Testing/ || mkdir -p Testing/
 	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
-sub-Testing-uninstall_subtargets-ordered: sub-csg-uninstall_subtargets-ordered  FORCE
+sub-Testing-uninstall_subtargets-ordered: sub-particle-uninstall_subtargets-ordered  FORCE
 	@test -d Testing/ || mkdir -p Testing/
 	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
 sub-Testing-uninstall_subtargets: FORCE
@@ -293,6 +337,7 @@ Makefile: csg_particules.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/resolve_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_post.prf \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/c++11.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qml_debug.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/declarative_debug.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/unix/gdb_dwarf_index.prf \
@@ -349,6 +394,7 @@ Makefile: csg_particules.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/resolve_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_post.prf:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/c++11.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qml_debug.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/declarative_debug.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/unix/gdb_dwarf_index.prf:
@@ -361,15 +407,15 @@ csg_particules.pro:
 qmake: FORCE
 	@$(QMAKE) -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile csg_particules.pro
 
-qmake_all: sub-vectorMatrix-qmake_all sub-image-qmake_all sub-csg-qmake_all sub-Testing-qmake_all sub-InterfaceCSG-qmake_all FORCE
+qmake_all: sub-vectorMatrix-qmake_all sub-image-qmake_all sub-csg-qmake_all sub-particle-qmake_all sub-Testing-qmake_all sub-InterfaceCSG-qmake_all FORCE
 
-make_first: sub-vectorMatrix-make_first-ordered sub-image-make_first-ordered sub-csg-make_first-ordered sub-Testing-make_first-ordered sub-InterfaceCSG-make_first-ordered FORCE
-all: sub-vectorMatrix-all-ordered sub-image-all-ordered sub-csg-all-ordered sub-Testing-all-ordered sub-InterfaceCSG-all-ordered FORCE
-clean: sub-vectorMatrix-clean-ordered sub-image-clean-ordered sub-csg-clean-ordered sub-Testing-clean-ordered sub-InterfaceCSG-clean-ordered FORCE
-distclean: sub-vectorMatrix-distclean-ordered sub-image-distclean-ordered sub-csg-distclean-ordered sub-Testing-distclean-ordered sub-InterfaceCSG-distclean-ordered FORCE
+make_first: sub-vectorMatrix-make_first-ordered sub-image-make_first-ordered sub-csg-make_first-ordered sub-particle-make_first-ordered sub-Testing-make_first-ordered sub-InterfaceCSG-make_first-ordered FORCE
+all: sub-vectorMatrix-all-ordered sub-image-all-ordered sub-csg-all-ordered sub-particle-all-ordered sub-Testing-all-ordered sub-InterfaceCSG-all-ordered FORCE
+clean: sub-vectorMatrix-clean-ordered sub-image-clean-ordered sub-csg-clean-ordered sub-particle-clean-ordered sub-Testing-clean-ordered sub-InterfaceCSG-clean-ordered FORCE
+distclean: sub-vectorMatrix-distclean-ordered sub-image-distclean-ordered sub-csg-distclean-ordered sub-particle-distclean-ordered sub-Testing-distclean-ordered sub-InterfaceCSG-distclean-ordered FORCE
 	-$(DEL_FILE) Makefile
-install_subtargets: sub-vectorMatrix-install_subtargets-ordered sub-image-install_subtargets-ordered sub-csg-install_subtargets-ordered sub-Testing-install_subtargets-ordered sub-InterfaceCSG-install_subtargets-ordered FORCE
-uninstall_subtargets: sub-vectorMatrix-uninstall_subtargets-ordered sub-image-uninstall_subtargets-ordered sub-csg-uninstall_subtargets-ordered sub-Testing-uninstall_subtargets-ordered sub-InterfaceCSG-uninstall_subtargets-ordered FORCE
+install_subtargets: sub-vectorMatrix-install_subtargets-ordered sub-image-install_subtargets-ordered sub-csg-install_subtargets-ordered sub-particle-install_subtargets-ordered sub-Testing-install_subtargets-ordered sub-InterfaceCSG-install_subtargets-ordered FORCE
+uninstall_subtargets: sub-vectorMatrix-uninstall_subtargets-ordered sub-image-uninstall_subtargets-ordered sub-csg-uninstall_subtargets-ordered sub-particle-uninstall_subtargets-ordered sub-Testing-uninstall_subtargets-ordered sub-InterfaceCSG-uninstall_subtargets-ordered FORCE
 
 sub-vectorMatrix-check_ordered:
 	@test -d vectorMatrix/ || mkdir -p vectorMatrix/
@@ -380,13 +426,16 @@ sub-image-check_ordered: sub-vectorMatrix-check_ordered
 sub-csg-check_ordered: sub-image-check_ordered 
 	@test -d csg/ || mkdir -p csg/
 	cd csg/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/csg/csg.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
-sub-Testing-check_ordered: sub-csg-check_ordered 
+sub-particle-check_ordered: sub-csg-check_ordered 
+	@test -d particle/ || mkdir -p particle/
+	cd particle/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/particle/particle.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
+sub-Testing-check_ordered: sub-particle-check_ordered 
 	@test -d Testing/ || mkdir -p Testing/
 	cd Testing/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/Testing/Testing.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
 sub-InterfaceCSG-check_ordered: sub-Testing-check_ordered 
 	@test -d InterfaceCSG/ || mkdir -p InterfaceCSG/
 	cd InterfaceCSG/ && ( test -e Makefile || $(QMAKE) /adhome/n/nl/nlutz/cpoa_s1/cpoa_m1s1/InterfaceCSG/InterfaceCSG.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
-check: sub-vectorMatrix-check_ordered sub-image-check_ordered sub-csg-check_ordered sub-Testing-check_ordered sub-InterfaceCSG-check_ordered
+check: sub-vectorMatrix-check_ordered sub-image-check_ordered sub-csg-check_ordered sub-particle-check_ordered sub-Testing-check_ordered sub-InterfaceCSG-check_ordered
 install: install_subtargets  FORCE
 
 uninstall:  uninstall_subtargets FORCE
